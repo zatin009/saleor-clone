@@ -385,7 +385,9 @@ const AppLayout = withStyles(styles, {
                             >
                               <Chip
                                 avatar={
-                                  user.avatar ?( <Avatar alt="user" src={user.avatar.url} /> ):null
+                                  user.avatar && (
+                                    <Avatar alt="user" src={user.avatar.url} />
+                                  )
                                 }
                                 className={classes.userChip}
                                 label={
