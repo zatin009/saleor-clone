@@ -33,6 +33,9 @@ All notable, unreleased changes to this project will be documented in this file.
 - Do not lose focus while typing in product description field - #4549 by @dominik-zeglen
 - Update JSON menu representation in mutations - #4524 by @maarcingebala
 - Display menu item form errors - #4551 by @dominik-zeglen
+- Add voucher settings - #4556 by @benekex2
+- Enforced pydocstyle for Python docstrings over the project - #4562 by @NyanKiyoshi
+- Add e2e test config - #4553 by @dominik-zeglen
 
 ## 2.8.0
 
