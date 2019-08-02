@@ -52,7 +52,7 @@ CACHES = {"default": django_cache_url.config()}
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'saleor',
+        'NAME': 'zatin-saleor',
         'USER': 'vkba_admin',
         'PASSWORD': 'vkba99999',
         'HOST': 'localhost',
@@ -200,7 +200,6 @@ TEMPLATES = [
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '12345'
-USE_JSON = True
 
 MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
