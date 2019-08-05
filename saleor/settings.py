@@ -2,12 +2,13 @@ import ast
 import os.path
 import warnings
 
-# import dj_database_url
 import dj_email_url
 import django_cache_url
 from django.contrib.messages import constants as messages
 from django.utils.translation import gettext_lazy as _, pgettext_lazy
 from django_prices.templatetags.prices_i18n import get_currency_fraction
+
+import dj_database_url
 
 from . import __version__
 

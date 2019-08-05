@@ -1,7 +1,6 @@
 import React from "react";
 
 import HomePage from "./views";
-
-const Component = () => <HomePage />;
+const Component = () => <HomePage/>;
 
 export default Component;

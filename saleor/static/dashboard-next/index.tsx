@@ -26,10 +26,12 @@ import { ShopProvider } from "./components/Shop";
 import ThemeProvider from "./components/Theme";
 import { WindowTitle } from "./components/WindowTitle";
 import { API_URI, APP_MOUNT_URI } from "./config";
-import ConfigurationSection, { configurationMenu } from "./configuration";
+import ConfigurationSection, { configurationMenu } from "./configuration"
+
 import { CustomerSection } from "./customers";
 import DiscountSection from "./discounts";
 import HomePage from "./home";
+
 import i18n from "./i18n";
 import NavigationSection from "./navigation";
 import { navigationSection } from "./navigation/urls";
@@ -123,7 +125,7 @@ const App: React.FC = () => {
                           !tokenAuthLoading &&
                           !tokenVerifyLoading ? (
                           <Switch>
-                            <SectionRoute exact path="/" component={HomePage} />
+                            <SectionRoute exact path="/" component={HomePage}/>
                             <SectionRoute
                               permissions={[PermissionEnum.MANAGE_PRODUCTS]}
                               path="/categories"

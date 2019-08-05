@@ -58,5 +58,4 @@ const HomeSection = () => {
     </HomePageQuery>
   );
 };
-
 export default HomeSection;

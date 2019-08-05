@@ -12,6 +12,7 @@ export type ShippingZonesListUrlQueryParams = BulkAction &
   Dialog<ShippingZonesListUrlDialog> &
   Pagination &
   SingleAction;
+
 export const shippingZonesListUrl = (
   params?: ShippingZonesListUrlQueryParams
 ) => shippingZonesListPath + "?" + stringifyQs(params);

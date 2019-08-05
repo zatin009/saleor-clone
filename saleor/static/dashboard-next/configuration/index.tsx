@@ -38,10 +38,10 @@ export const configurationMenu: MenuItem[] = [
     url: staffListUrl()
   },
   {
-    description: i18n.t("Manage how you ship out orders."),
+    description: i18n.t("Manage how you delivery the orders."),
     icon: <ShippingMethods fontSize="inherit" viewBox="0 0 44 44" />,
     permission: PermissionEnum.MANAGE_SHIPPING,
-    title: i18n.t("Shipping Methods"),
+    title: i18n.t("A2A Logistic"),
     url: shippingZonesListUrl()
   },
   {
@@ -91,4 +91,5 @@ export const ConfigurationSection: React.StatelessComponent = () => {
     </>
   );
 };
+
 export default ConfigurationSection;
