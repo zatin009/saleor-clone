@@ -28,7 +28,7 @@ const menuStructure: IMenuItem[] = [
   {
     ariaLabel: "home",
     icon: homeIcon,
-    label: i18n.t("Home", { context: "Menu label" }),
+    label: i18n.t("My Branch", { context: "Menu label" }),
     url: "/"
   },
   {

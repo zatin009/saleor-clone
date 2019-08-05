@@ -2,7 +2,7 @@ import ast
 import os.path
 import warnings
 
-import dj_database_url
+# import dj_database_url
 import dj_email_url
 import django_cache_url
 from django.contrib.messages import constants as messages
@@ -50,15 +50,16 @@ if REDIS_URL:
 CACHES = {"default": django_cache_url.config()}
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'zatin-saleor',
-        'USER': 'vkba_admin',
-        'PASSWORD': 'vkba99999',
-        'HOST': 'localhost',
-        'PORT': '',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "zatin-saleor",
+        "USER": "vkba_admin",
+        "PASSWORD": "vkba99999",
+        "HOST": "localhost",
+        "PORT": "",
     }
 }
+
 
 TIME_ZONE = "America/Chicago"
 LANGUAGE_CODE = "en"
@@ -199,7 +200,7 @@ TEMPLATES = [
 ]
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '12345'
+SECRET_KEY = "12345"
 
 MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -688,5 +689,4 @@ PLUGINS = os.environ.get("PLUGINS", [])
 # Whether DraftJS should be used be used instead of HTML
 # True to use DraftJS (JSON based), for the 2.0 dashboard
 # False to use the old editor from dashboard 1.0
-# USE_JSON_CONTENT = get_bool_from_env("USE_JSON_CONTENT", False)
-USE_JSON_CONTENT = get_bool_from_env("USE_JSON_CONTENT", True)
+USE_JSON_CONTENT = get_bool_from_env("USE_JSON_CONTENT", False)

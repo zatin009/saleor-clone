@@ -98,9 +98,9 @@ const apolloClient = new ApolloClient({
   link: invalidTokenLink.concat(authLink.concat(link))
 });
 
+
 const App: React.FC = () => {
   const isDark = localStorage.getItem("theme") === "true";
-
   return (
     <ApolloProvider client={apolloClient}>
       <BrowserRouter basename={APP_MOUNT_URI}>
@@ -222,5 +222,4 @@ const App: React.FC = () => {
     </ApolloProvider>
   );
 };
-
 render(<App />, document.querySelector("#dashboard-app"));
