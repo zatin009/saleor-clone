@@ -114,7 +114,6 @@ IMAGES_MAPPING = {
     118: ["saleordemoproduct_cl_bogo04_1.png", "saleordemoproduct_cl_bogo04_2.png"],
 }
 
-
 CATEGORY_IMAGES = {7: "accessories.jpg", 8: "groceries.jpg", 9: "apparel.jpg"}
 
 COLLECTION_IMAGES = {1: "summer.jpg", 2: "clothing.jpg"}
@@ -352,8 +351,8 @@ def create_fake_payment(mock_email_confirmation, order):
 def create_order_lines(order, discounts, how_many=10):
     variants = (
         ProductVariant.objects.filter()
-        .order_by("?")
-        .prefetch_related("product__product_type")[:how_many]
+            .order_by("?")
+            .prefetch_related("product__product_type")[:how_many]
     )
     variants_iter = itertools.cycle(variants)
     lines = []
@@ -879,7 +878,7 @@ def create_page():
                 "key": "",
                 "data": {},
                 "text": "A modular, high performance e-commerce storefront "
-                "built with GraphQL, Django, and ReactJS.",
+                        "built with GraphQL, Django, and ReactJS.",
                 "type": "unstyled",
                 "depth": 0,
                 "entityRanges": [],
@@ -898,12 +897,12 @@ def create_page():
                 "key": "",
                 "data": {},
                 "text": "Saleor is a rapidly-growing open source e-commerce platform "
-                "that has served high-volume companies from branches like "
-                "publishing and apparel since 2012. Based on Python and "
-                "Django, the latest major update introduces a modular "
-                "front end with a GraphQL API and storefront and dashboard "
-                "written in React to make Saleor a full-functionality "
-                "open source e-commerce.",
+                        "that has served high-volume companies from branches like "
+                        "publishing and apparel since 2012. Based on Python and "
+                        "Django, the latest major update introduces a modular "
+                        "front end with a GraphQL API and storefront and dashboard "
+                        "written in React to make Saleor a full-functionality "
+                        "open source e-commerce.",
                 "type": "unstyled",
                 "depth": 0,
                 "entityRanges": [],
@@ -942,7 +941,7 @@ def create_page():
         "title": "About",
         "is_published": True,
     }
-    page, dummy = Page.objects.get_or_create(slug="about", **page_dataXXX, ***XXX)
+    page, dummy = Page.objects.get_or_create(slug="about", defaults=page_data)
     yield "Page %s created" % page.slug
 
 
@@ -986,7 +985,7 @@ def create_menus():
     item, _ = bottom_menu.items.get_or_create(name="Collections", collection=collection)
 
     for collection in Collection.objects.filter(
-        products__isnull=False, background_image__isnull=False
+            products__isnull=False, background_image__isnull=False
     ):
         bottom_menu.items.get_or_create(
             name=collection.name, collection=collection, parent=item
