@@ -107,6 +107,8 @@ const ShippingZoneDetailsDialogs: React.StatelessComponent<
           }}
         />
       </ActionDialog>
+
+      {/* <WORKING FUNC >*/}
       <ShippingZoneRateDialog
         action="create"
         confirmButtonState={createRateTransitionState}
@@ -156,6 +158,7 @@ const ShippingZoneDetailsDialogs: React.StatelessComponent<
         rate={undefined}
         variant={params.type}
       />
+      {/*<WORKING FUNC/>*/}
       <ActionDialog
         confirmButtonState={deleteZoneTransitionState}
         onClose={closeModal}

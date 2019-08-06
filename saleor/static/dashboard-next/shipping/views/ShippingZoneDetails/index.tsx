@@ -3,15 +3,15 @@ import React from "react";
 import useNavigator from "@saleor/hooks/useNavigator";
 import useNotifier from "@saleor/hooks/useNotifier";
 import i18n from "../../../i18n";
-import { getMutationState, maybe } from "../../../misc";
-import { ShippingMethodTypeEnum } from "../../../types/globalTypes";
+import {getMutationState, maybe} from "../../../misc";
+import {ShippingMethodTypeEnum} from "../../../types/globalTypes";
 import ShippingZoneDetailsPage from "../../components/ShippingZoneDetailsPage";
-import { TypedShippingZone } from "../../queries";
-import { CreateShippingRate } from "../../types/CreateShippingRate";
-import { DeleteShippingRate } from "../../types/DeleteShippingRate";
-import { DeleteShippingZone } from "../../types/DeleteShippingZone";
-import { UpdateShippingRate } from "../../types/UpdateShippingRate";
-import { UpdateShippingZone } from "../../types/UpdateShippingZone";
+import {TypedShippingZone} from "../../queries";
+import {CreateShippingRate} from "../../types/CreateShippingRate";
+import {DeleteShippingRate} from "../../types/DeleteShippingRate";
+import {DeleteShippingZone} from "../../types/DeleteShippingZone";
+import {UpdateShippingRate} from "../../types/UpdateShippingRate";
+import {UpdateShippingZone} from "../../types/UpdateShippingZone";
 import {
   shippingZonesListUrl,
   shippingZoneUrl,
@@ -20,17 +20,15 @@ import {
 import ShippingZoneDetailsDialogs from "./ShippingZoneDetailsDialogs";
 import ShippingZoneOperations from "./ShippingZoneOperations";
 
-export interface ShippingZoneDetailsProps {
+export interface ShippingZoneDetailsProps{
   id: string;
   params: ShippingZoneUrlQueryParams;
 }
 
-const ShippingZoneDetails: React.StatelessComponent<
-  ShippingZoneDetailsProps
-> = ({ id, params }) => {
+
+const ShippingZoneDetails: React.StatelessComponent<ShippingZoneDetailsProps> = ({id, params}) => {
   const navigate = useNavigator();
   const notify = useNotifier();
-
   const closeModal = () => navigate(shippingZoneUrl(id));
 
   const onShippingRateCreate = (data: CreateShippingRate) => {
@@ -93,8 +91,8 @@ const ShippingZoneDetails: React.StatelessComponent<
       onShippingZoneUpdate={onShippingZoneUpdate}
     >
       {ops => (
-        <TypedShippingZone variables={{ id }}>
-          {({ data, loading }) => {
+        <TypedShippingZone variables={{id}}>
+          {({data, loading}) => {
             const formTransitionState = getMutationState(
               ops.shippingZoneUpdate.opts.called,
               ops.shippingZoneUpdate.opts.loading,
@@ -236,4 +234,5 @@ const ShippingZoneDetails: React.StatelessComponent<
     </ShippingZoneOperations>
   );
 };
+
 export default ShippingZoneDetails;

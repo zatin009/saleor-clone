@@ -49,4 +49,5 @@ export const ShippingRouter: React.StatelessComponent = () => (
     </Switch>
   </>
 );
+
 export default ShippingRouter;

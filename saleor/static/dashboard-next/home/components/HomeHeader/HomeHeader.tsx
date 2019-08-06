@@ -32,7 +32,7 @@ const HomeOrdersCard = withStyles(styles, { name: "HomeOrdersCard" })(
     <div className={classes.headerContainer} data-tc="home-header">
       <Typography className={classes.pageHeader} variant="h4">
         {userName ? (
-          i18n.t("Hello there, {{userName}}", { userName })
+          i18n.t("Hello the Universe , {{userName}}", { userName })
         ) : (
           <Skeleton style={{ width: "10em" }} />
         )}
