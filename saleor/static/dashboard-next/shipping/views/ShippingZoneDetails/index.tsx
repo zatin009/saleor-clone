@@ -29,7 +29,7 @@ export interface ShippingZoneDetailsProps{
 const ShippingZoneDetails: React.StatelessComponent<ShippingZoneDetailsProps> = ({id, params}) => {
   const navigate = useNavigator();
   const notify = useNotifier();
-  const closeModal = () => navigate(shippingZoneUrl(id));
+  const closeModal = () => navigate(shippingZoneUrl(id))
 
   const onShippingRateCreate = (data: CreateShippingRate) => {
     if (data.shippingPriceCreate.errors.length === 0) {

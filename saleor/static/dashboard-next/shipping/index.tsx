@@ -13,6 +13,7 @@ import {
 } from "./urls";
 import ShippingZoneCreate from "./views/ShippingZoneCreate";
 import ShippingZoneDetailsComponent from "./views/ShippingZoneDetails";
+
 import ShippingZonesListComponent from "./views/ShippingZonesList";
 
 const ShippingZonesList: React.StatelessComponent<RouteComponentProps<{}>> = ({
@@ -26,6 +27,7 @@ const ShippingZonesList: React.StatelessComponent<RouteComponentProps<{}>> = ({
 interface ShippingZoneDetailsRouteProps {
   id: string;
 }
+
 const ShippingZoneDetails: React.StatelessComponent<
   RouteComponentProps<ShippingZoneDetailsRouteProps>
 > = ({ location, match }) => {
@@ -39,6 +41,7 @@ const ShippingZoneDetails: React.StatelessComponent<
   );
 };
 
+
 export const ShippingRouter: React.StatelessComponent = () => (
   <>
     <WindowTitle title={i18n.t("Shipping")} />
@@ -49,5 +52,4 @@ export const ShippingRouter: React.StatelessComponent = () => (
     </Switch>
   </>
 );
-
 export default ShippingRouter;

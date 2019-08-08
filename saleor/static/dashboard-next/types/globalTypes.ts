@@ -168,10 +168,13 @@ export enum SaleType {
   PERCENTAGE = "PERCENTAGE"
 }
 
+// < ADD PERCENTAGE
 export enum ShippingMethodTypeEnum {
   PRICE = "PRICE",
-  WEIGHT = "WEIGHT"
+  WEIGHT = "WEIGHT",
+  PERCENTAGE = "PERCENTAGE"
 }
+// ADD PERCENTAGE>
 
 export enum StockAvailability {
   IN_STOCK = "IN_STOCK",
