@@ -22,7 +22,9 @@ from ..core.weight import (
     zero_weight,
 )
 from . import ShippingMethodType
-
+# <ADD
+from django.core.validators import MaxValueValidator,MinValueValidator
+# ADD>
 
 def _applicable_weight_based_methods(weight, qs):
     """Return weight based shipping methods that are applicable for the total weight."""
@@ -165,6 +167,11 @@ class ShippingMethod(models.Model):
         decimal_places=settings.DEFAULT_DECIMAL_PLACES,
         default=0,
     )
+    # <ADD
+    percentage = models.DecimalField(null=True, blank=True, default=None,
+                                     max_digits=5, decimal_places=2,
+                                     validators=[MinValueValidator(0), MaxValueValidator(100)])
+    # ADD>
     shipping_zone = models.ForeignKey(
         ShippingZone, related_name="shipping_methods", on_delete=models.CASCADE
     )

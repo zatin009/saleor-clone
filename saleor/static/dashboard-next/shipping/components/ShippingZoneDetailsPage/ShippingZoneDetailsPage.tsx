@@ -20,7 +20,7 @@ import ShippingZoneRates from "../ShippingZoneRates";
 export interface FormData {
   name: string;
 }
-
+// <ADD onPercentageRateAdd & onPercentageRateEdit
 export interface ShippingZoneDetailsPageProps {
   disabled: boolean;
   errors: UserError[];
@@ -36,7 +36,10 @@ export interface ShippingZoneDetailsPageProps {
   onSubmit: (data: FormData) => void;
   onWeightRateAdd: () => void;
   onWeightRateEdit: (id: string) => void;
+  onPercentageRateAdd : () => void;
+  onPercentageRateEdit : (id:string)=>void;
 }
+// ADD onPercentageRateAdd & onPercentageRateEdit>
 
 const ShippingZoneDetailsPage: React.StatelessComponent<
   ShippingZoneDetailsPageProps
@@ -49,6 +52,8 @@ const ShippingZoneDetailsPage: React.StatelessComponent<
   onDelete,
   onPriceRateAdd,
   onPriceRateEdit,
+  onPercentageRateAdd,
+  onPercentageRateEdit,
   onRateRemove,
   onSubmit,
   onWeightRateAdd,
@@ -90,6 +95,19 @@ const ShippingZoneDetailsPage: React.StatelessComponent<
                 onCountryAssign={onCountryAdd}
                 onCountryUnassign={onCountryRemove}
                 title={i18n.t("Countries")}
+              />
+              <CardSpacer />
+              <ShippingZoneRates
+                disabled={disabled}
+                onRateAdd={onPercentageRateAdd}
+                onRateEdit={onPercentageRateEdit}
+                onRateRemove={onRateRemove}
+                rates={maybe(() =>
+                  shippingZone.shippingMethods.filter(
+                    method => method.type === ShippingMethodTypeEnum.PRICE
+                  )
+                )}
+                variant="percentage"
               />
               <CardSpacer />
               <ShippingZoneRates

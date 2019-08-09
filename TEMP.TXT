@@ -1,0 +1,23 @@
+// <ADD
+                  onPercentageRateAdd={() =>
+                    navigate(
+                      shippingZoneUrl(id, {
+                        action: "add-rate",
+                        type: ShippingMethodTypeEnum.PERCENTAGE
+                      })
+                    )
+                  }
+                  onPercentageRateEdit={rateId =>
+                    navigate(
+                      shippingZoneUrl(id, {
+                        action: "edit-rate",
+                        id: rateId
+                      })
+                    )
+                  }
+                  // ADD>
+var x = (day == "yes")
+? "Good Day!"
+: (day == "no")
+? "Good Night!"
+: "";

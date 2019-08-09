@@ -13,7 +13,6 @@ import {
 } from "./urls";
 import ShippingZoneCreate from "./views/ShippingZoneCreate";
 import ShippingZoneDetailsComponent from "./views/ShippingZoneDetails";
-
 import ShippingZonesListComponent from "./views/ShippingZonesList";
 
 const ShippingZonesList: React.StatelessComponent<RouteComponentProps<{}>> = ({

@@ -25,12 +25,10 @@ export interface ShippingZoneDetailsProps{
   params: ShippingZoneUrlQueryParams;
 }
 
-
 const ShippingZoneDetails: React.StatelessComponent<ShippingZoneDetailsProps> = ({id, params}) => {
   const navigate = useNavigator();
   const notify = useNotifier();
   const closeModal = () => navigate(shippingZoneUrl(id))
-
   const onShippingRateCreate = (data: CreateShippingRate) => {
     if (data.shippingPriceCreate.errors.length === 0) {
       notify({
@@ -179,6 +177,24 @@ const ShippingZoneDetails: React.StatelessComponent<ShippingZoneDetailsProps> = 
                       })
                     )
                   }
+                  // <ADD
+                  onPercentageRateAdd={() =>
+                    navigate(
+                      shippingZoneUrl(id, {
+                        action: "add-rate",
+                        type: ShippingMethodTypeEnum.PERCENTAGE
+                      })
+                    )
+                  }
+                  onPercentageRateEdit={rateId =>
+                    navigate(
+                      shippingZoneUrl(id, {
+                        action: "edit-rate",
+                        id: rateId
+                      })
+                    )
+                  }
+                  // ADD>
                   onRateRemove={rateId =>
                     navigate(
                       shippingZoneUrl(id, {
@@ -234,5 +250,4 @@ const ShippingZoneDetails: React.StatelessComponent<ShippingZoneDetailsProps> = 
     </ShippingZoneOperations>
   );
 };
-
 export default ShippingZoneDetails;

@@ -65,9 +65,11 @@ const ShippingZoneRates = withStyles(styles, { name: "ShippingZoneRates" })(
       <CardTitle
         height="const"
         title={
-          variant === "price"
-            ? i18n.t("Price Based Rates")
-            : i18n.t("Weight Based Rates")
+          (variant === "percentage"
+            ? i18n.t("Percentage Based Rates")
+            :variant === "price"
+              ? i18n.t("Price Based Rates")
+              : i18n.t("Weight Based Rates"))
         }
         toolbar={
           <Button color="primary" onClick={onRateAdd}>
