@@ -84,3 +84,5 @@ export interface CreateShippingRate {
 export interface CreateShippingRateVariables {
   input: ShippingPriceInput;
 }
+// ######################### Before Add Percentage ORIGINAL #########################
+// ######################### Before Add Percentage ORIGINAL #########################

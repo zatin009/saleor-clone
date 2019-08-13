@@ -20,7 +20,7 @@ import ShippingZoneRates from "../ShippingZoneRates";
 export interface FormData {
   name: string;
 }
-// <ADD onPercentageRateAdd & onPercentageRateEdit
+
 export interface ShippingZoneDetailsPageProps {
   disabled: boolean;
   errors: UserError[];
@@ -39,7 +39,6 @@ export interface ShippingZoneDetailsPageProps {
   onPercentageRateAdd : () => void;
   onPercentageRateEdit : (id:string)=>void;
 }
-// ADD onPercentageRateAdd & onPercentageRateEdit>
 
 const ShippingZoneDetailsPage: React.StatelessComponent<
   ShippingZoneDetailsPageProps

@@ -29,7 +29,7 @@ import { ShippingZoneDetailsFragment_shippingMethods } from "../../types/Shippin
 export interface ShippingZoneRatesProps {
   disabled: boolean;
   rates: ShippingZoneDetailsFragment_shippingMethods[];
-  variant: "price" | "weight";
+  variant: "percentage" | "price" | "weight";
   onRateAdd: () => void;
   onRateEdit: (id: string) => void;
   onRateRemove: (id: string) => void;
@@ -48,7 +48,7 @@ const styles = (theme: Theme) =>
       width: 300
     },
     valueColumn: {
-      width: 300
+      width:300
     }
   });
 const ShippingZoneRates = withStyles(styles, { name: "ShippingZoneRates" })(
@@ -86,17 +86,20 @@ const ShippingZoneRates = withStyles(styles, { name: "ShippingZoneRates" })(
               {i18n.t("Name", { context: "object" })}
             </TableCell>
             <TableCell className={classes.valueColumn}>
-              {variant === "price"
-                ? i18n.t("Value Range", { context: "object" })
-                : i18n.t("Weight Range", { context: "object" })}
+              {variant === "weight"
+                ? i18n.t("Weight Range", { context: "object" })
+                : i18n.t("Value Range", { context: "object" })}
             </TableCell>
             <TableCell className={classes.nameColumn}>
-              {i18n.t("Price", { context: "object" })}
+              {variant === "percentage"
+                ? i18n.t("Percentage", { context: "object" })
+                : i18n.t("Price", { context: "object" })}
             </TableCell>
             <TableCell />
             <TableCell />
           </TableRow>
         </TableHead>
+        {/*< Working Area*/}
         <TableBody>
           {renderCollection(
             rates,
@@ -112,15 +115,15 @@ const ShippingZoneRates = withStyles(styles, { name: "ShippingZoneRates" })(
                 <TableCell>
                   {maybe<React.ReactNode>(
                     () =>
-                      variant === "price" ? (
-                        <MoneyRange
-                          from={rate.minimumOrderPrice}
-                          to={rate.maximumOrderPrice}
-                        />
-                      ) : (
+                      variant === "weight" ? (
                         <WeightRange
                           from={rate.minimumOrderWeight}
                           to={rate.maximumOrderWeight}
+                        />
+                      ) : (
+                        <MoneyRange
+                          from={rate.minimumOrderPrice}
+                          to={rate.maximumOrderPrice}
                         />
                       ),
                     <Skeleton />
@@ -157,6 +160,7 @@ const ShippingZoneRates = withStyles(styles, { name: "ShippingZoneRates" })(
             )
           )}
         </TableBody>
+        {/* Working Area >*/}
       </Table>
     </Card>
   )

@@ -120,13 +120,17 @@ const ShippingZoneRateDialog = withStyles(styles, {
             return (
               <>
                 <DialogTitle>
-                  {variant === ShippingMethodTypeEnum.PRICE
+                  {variant === ShippingMethodTypeEnum.PERCENTAGE
                     ? action === "create"
-                      ? i18n.t("Add Price Rate")
-                      : i18n.t("Edit Price Rate")
-                    : action === "create"
-                    ? i18n.t("Add Weight Rate")
-                    : i18n.t("Edit Weight Rate")}
+                      ? i18n.t("Add Percentage Rate")
+                      : i18n.t("Edit Percentage Rate")
+                  :variant === ShippingMethodTypeEnum.PRICE
+                  ? action === "create"
+                    ? i18n.t("Add Price Rate")
+                    : i18n.t("Edit Price Rate")
+                  : action === "create"
+                  ? i18n.t("Add Weight Rate")
+                  : i18n.t("Edit Weight Rate")}
                 </DialogTitle>
                 <DialogContent>
                   <TextField
