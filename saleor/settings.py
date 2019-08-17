@@ -1,7 +1,6 @@
 import ast
 import os.path
 import warnings
-
 import dj_database_url
 import dj_email_url
 import django_cache_url
@@ -27,7 +26,7 @@ def get_bool_from_env(name, default_value):
 
 
 DEBUG = get_bool_from_env("DEBUG", True)
-
+# DEBUG = True
 SITE_ID = 1
 
 PROJECT_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))

@@ -5,7 +5,7 @@
 import { ShippingPriceInput, ShippingMethodTypeEnum } from "./../../types/globalTypes";
 
 // ====================================================
-// GraphQL mutation operation: CreateShippingRate
+// GraphQL mutation operation:   CreateShippingRate
 // ====================================================
 
 export interface CreateShippingRate_shippingPriceCreate_errors {

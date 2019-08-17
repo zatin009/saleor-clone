@@ -41,6 +41,7 @@ class ShippingMethod(CountableDjangoObjectType):
             "minimum_order_weight",
             "name",
             "price",
+            "percentage",
         ]
 
 

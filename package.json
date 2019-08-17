@@ -54,6 +54,7 @@
     "fast-array-diff": "^0.2.0",
     "fuzzaldrin": "^2.1.0",
     "graphql": "^14.4.2",
+    "graphql-code-generator": "^0.18.2",
     "graphql-tag": "^2.10.1",
     "i18next": "^11.10.2",
     "i18next-browser-languagedetector": "^2.2.4",

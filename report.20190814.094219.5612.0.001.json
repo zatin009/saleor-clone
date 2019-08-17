@@ -1,0 +1,331 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20190814.094219.5612.0.001.json",
+    "dumpEventTime": "2019-08-14T09:42:23Z",
+    "dumpEventTimeStamp": "1565750543172",
+    "processId": 5612,
+    "cwd": "E:\\Buying Agent\\vkirirom-buying-agent",
+    "commandLine": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Program Files\\JetBrains\\PyCharm 2019.1.3\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\js-language-service.js",
+      "-id=1565745217545",
+      "-debug-name=typescript"
+    ],
+    "nodejsVersion": "v12.7.0",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "12.7.0",
+      "v8": "7.5.288.22-node.16",
+      "uv": "1.30.1",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "72",
+      "nghttp2": "1.39.1",
+      "napi": "4",
+      "llhttp": "1.1.4",
+      "http_parser": "2.8.0",
+      "openssl": "1.1.1c",
+      "cldr": "35.1",
+      "icu": "64.2",
+      "tz": "2019a",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "headersUrl": "https://nodejs.org/download/release/v12.7.0/node-v12.7.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.7.0/node-v12.7.0.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v12.7.0/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.18362",
+    "osVersion": "Windows 10 Pro",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM) i5-6200U CPU @ 2.30GHz",
+        "speed": 2400,
+        "user": 5148953,
+        "nice": 0,
+        "sys": 6915250,
+        "idle": 50645437,
+        "irq": 2345140
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-6200U CPU @ 2.30GHz",
+        "speed": 2400,
+        "user": 5148953,
+        "nice": 0,
+        "sys": 6915250,
+        "idle": 50645437,
+        "irq": 2345140
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-6200U CPU @ 2.30GHz",
+        "speed": 2400,
+        "user": 5148953,
+        "nice": 0,
+        "sys": 6915250,
+        "idle": 50645437,
+        "irq": 2345140
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-6200U CPU @ 2.30GHz",
+        "speed": 2400,
+        "user": 5148953,
+        "nice": 0,
+        "sys": 6915250,
+        "idle": 50645437,
+        "irq": 2345140
+      }
+    ],
+    "host": "DESKTOP-SVO31D5"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x00007ff693b66b89",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff693b6a4fc",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff693b694a8",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff693c533db",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff69443a3de",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff69442272a",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6942b3e3c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6942bbd6f",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6942b2003",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6942b0894",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6942cf375",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6940856ed",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff69485982d",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6947cd4dc",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00000310a80b1efd",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 336408576,
+    "totalCommittedMemory": 336408576,
+    "usedMemory": 322085920,
+    "availableMemory": 1875986296,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 262144,
+        "capacity": 261832,
+        "used": 31960,
+        "available": 229872
+      },
+      "new_space": {
+        "memorySize": 1048576,
+        "committedMemory": 1048576,
+        "capacity": 1047328,
+        "used": 1047320,
+        "available": 8
+      },
+      "old_space": {
+        "memorySize": 304492544,
+        "committedMemory": 304492544,
+        "capacity": 304043168,
+        "used": 292401512,
+        "available": 11641656
+      },
+      "code_space": {
+        "memorySize": 3833856,
+        "committedMemory": 3833856,
+        "capacity": 3628576,
+        "used": 2354176,
+        "available": 1274400
+      },
+      "map_space": {
+        "memorySize": 1052672,
+        "committedMemory": 1052672,
+        "capacity": 1050792,
+        "used": 664480,
+        "available": 386312
+      },
+      "large_object_space": {
+        "memorySize": 25669632,
+        "committedMemory": 25669632,
+        "capacity": 25583016,
+        "used": 25583016,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 49152,
+        "committedMemory": 49152,
+        "capacity": 3456,
+        "used": 3456,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 1047328,
+        "used": 0,
+        "available": 1047328
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 64.312,
+    "kernelCpuSeconds": 32.843,
+    "cpuConsumptionPercent": 1.80384,
+    "maxRss": 423047168,
+    "pageFaults": {
+      "IORequired": 620741,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 6196,
+      "writes": 1189
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "=::": "::\\",
+    "=C:": "C:\\",
+    "ALLUSERSPROFILE": "C:\\ProgramData",
+    "APPDATA": "C:\\Users\\yinma\\AppData\\Roaming",
+    "CommonProgramFiles": "C:\\Program Files\\Common Files",
+    "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
+    "CommonProgramW6432": "C:\\Program Files\\Common Files",
+    "COMPUTERNAME": "DESKTOP-SVO31D5",
+    "ComSpec": "C:\\Windows\\system32\\cmd.exe",
+    "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
+    "FPS_BROWSER_APP_PROFILE_STRING": "Internet Explorer",
+    "FPS_BROWSER_USER_PROFILE_STRING": "Default",
+    "HOMEDRIVE": "C:",
+    "HOMEPATH": "\\Users\\yinma",
+    "INTEL_DEV_REDIST": "C:\\Program Files (x86)\\Common Files\\Intel\\Shared Libraries\\",
+    "LOCALAPPDATA": "C:\\Users\\yinma\\AppData\\Local",
+    "LOGONSERVER": "\\\\DESKTOP-SVO31D5",
+    "MIC_LD_LIBRARY_PATH": "C:\\Program Files (x86)\\Common Files\\Intel\\Shared Libraries\\compiler\\lib\\mic",
+    "NUMBER_OF_PROCESSORS": "4",
+    "OneDrive": "C:\\Users\\yinma\\OneDrive",
+    "OneDriveConsumer": "C:\\Users\\yinma\\OneDrive",
+    "OS": "Windows_NT",
+    "Path": "C:\\Program Files (x86)\\Common Files\\Intel\\Shared Libraries\\redist\\intel64\\compiler;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Git\\cmd;C:\\Program Files\\GTK3-Runtime Win64\\bin;C:\\msys64\\mingw32\\bin\\;C:\\Program Files\\nodejs\\;C:\\Program Files (x86)\\Yarn\\bin\\;C:\\Users\\yinma\\AppData\\Local\\Programs\\Python\\Python37-32\\Scripts\\;C:\\Users\\yinma\\AppData\\Local\\Programs\\Python\\Python37-32\\;C:\\Users\\yinma\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Program Files\\JetBrains\\PyCharm 2019.1.3\\bin;;C:\\Users\\yinma\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Program Files\\GTK3-Runtime Win64\\bin;C:\\msys64\\mingw32\\bin\\;C:\\Users\\yinma\\AppData\\Roaming\\npm;C:\\Users\\yinma\\AppData\\Local\\Yarn\\bin",
+    "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC",
+    "PROCESSOR_ARCHITECTURE": "AMD64",
+    "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 78 Stepping 3, GenuineIntel",
+    "PROCESSOR_LEVEL": "6",
+    "PROCESSOR_REVISION": "4e03",
+    "ProgramData": "C:\\ProgramData",
+    "ProgramFiles": "C:\\Program Files",
+    "ProgramFiles(x86)": "C:\\Program Files (x86)",
+    "ProgramW6432": "C:\\Program Files",
+    "PSModulePath": "C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules",
+    "PUBLIC": "C:\\Users\\Public",
+    "PyCharm": "C:\\Program Files\\JetBrains\\PyCharm 2019.1.3\\bin;",
+    "SESSIONNAME": "Console",
+    "SystemDrive": "C:",
+    "SystemRoot": "C:\\Windows",
+    "TEMP": "C:\\Users\\yinma\\AppData\\Local\\Temp",
+    "TMP": "C:\\Users\\yinma\\AppData\\Local\\Temp",
+    "USERDOMAIN": "DESKTOP-SVO31D5",
+    "USERDOMAIN_ROAMINGPROFILE": "DESKTOP-SVO31D5",
+    "USERNAME": "yinma",
+    "USERPROFILE": "C:\\Users\\yinma",
+    "VBOX_MSI_INSTALL_PATH": "C:\\Program Files\\Oracle\\VirtualBox\\",
+    "windir": "C:\\Windows"
+  },
+  "sharedObjects": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "C:\\Windows\\SYSTEM32\\ntdll.dll",
+    "C:\\Program Files\\AVAST Software\\Avast\\aswhook.dll",
+    "C:\\Windows\\System32\\KERNEL32.DLL",
+    "C:\\Windows\\System32\\KERNELBASE.dll",
+    "C:\\Windows\\System32\\WS2_32.dll",
+    "C:\\Windows\\System32\\RPCRT4.dll",
+    "C:\\Windows\\System32\\ADVAPI32.dll",
+    "C:\\Windows\\System32\\msvcrt.dll",
+    "C:\\Windows\\System32\\sechost.dll",
+    "C:\\Windows\\System32\\USER32.dll",
+    "C:\\Windows\\System32\\win32u.dll",
+    "C:\\Windows\\System32\\GDI32.dll",
+    "C:\\Windows\\System32\\gdi32full.dll",
+    "C:\\Windows\\System32\\msvcp_win.dll",
+    "C:\\Windows\\System32\\ucrtbase.dll",
+    "C:\\Windows\\System32\\PSAPI.DLL",
+    "C:\\Windows\\System32\\CRYPT32.dll",
+    "C:\\Windows\\System32\\MSASN1.dll",
+    "C:\\Windows\\System32\\bcrypt.dll",
+    "C:\\Windows\\SYSTEM32\\dbghelp.dll",
+    "C:\\Windows\\SYSTEM32\\IPHLPAPI.DLL",
+    "C:\\Windows\\SYSTEM32\\USERENV.dll",
+    "C:\\Windows\\System32\\profapi.dll",
+    "C:\\Windows\\SYSTEM32\\WINMM.dll",
+    "C:\\Windows\\SYSTEM32\\WINMMBASE.dll",
+    "C:\\Windows\\System32\\cfgmgr32.dll",
+    "C:\\Windows\\System32\\bcryptPrimitives.dll",
+    "C:\\Windows\\System32\\IMM32.DLL",
+    "C:\\Windows\\System32\\powrprof.dll",
+    "C:\\Windows\\System32\\UMPDC.dll",
+    "C:\\Windows\\system32\\uxtheme.dll",
+    "C:\\Windows\\System32\\combase.dll",
+    "C:\\Windows\\system32\\mswsock.dll",
+    "C:\\Windows\\System32\\kernel.appcore.dll",
+    "C:\\Windows\\system32\\napinsp.dll",
+    "C:\\Windows\\system32\\pnrpnsp.dll",
+    "C:\\Windows\\SYSTEM32\\DNSAPI.dll",
+    "C:\\Windows\\System32\\NSI.dll",
+    "C:\\Windows\\System32\\winrnr.dll",
+    "C:\\Windows\\system32\\NLAapi.dll",
+    "C:\\Windows\\system32\\wshbth.dll"
+  ]
+}

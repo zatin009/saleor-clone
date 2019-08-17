@@ -80,7 +80,7 @@ export const TypedShippingZones = TypedQuery<
 >(shippingZones);
 
 const shippingZone = gql`
-  ${shippingZoneDetailsFragment}
+  ${shippingZoneDetailsFragment}  
   query ShippingZone($id: ID!) {
     shippingZone(id: $id) {
       ...ShippingZoneDetailsFragment
