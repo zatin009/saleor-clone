@@ -39,6 +39,7 @@ export const shippingMethodFragment = gql`
       currency
     }
     type
+    percentage
   }
 `;
 export const shippingZoneDetailsFragment = gql`

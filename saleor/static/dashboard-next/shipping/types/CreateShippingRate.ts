@@ -5,7 +5,7 @@
 import { ShippingPriceInput, ShippingMethodTypeEnum } from "./../../types/globalTypes";
 
 // ====================================================
-// GraphQL mutation operation:   CreateShippingRate
+// GraphQL mutation operation: CreateShippingRate
 // ====================================================
 
 export interface CreateShippingRate_shippingPriceCreate_errors {
@@ -84,5 +84,3 @@ export interface CreateShippingRate {
 export interface CreateShippingRateVariables {
   input: ShippingPriceInput;
 }
-// ######################### Before Add Percentage ORIGINAL #########################
-// ######################### Before Add Percentage ORIGINAL #########################

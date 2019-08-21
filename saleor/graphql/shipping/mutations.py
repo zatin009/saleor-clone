@@ -12,7 +12,7 @@ from .types import ShippingMethod, ShippingZone
 class ShippingPriceInput(graphene.InputObjectType):
     name = graphene.String(description="Name of the shipping method.")
     price = Decimal(description="Shipping price of the shipping method.")
-    percentage = Decimal(description="Shipping percentage of the shipping method.")
+    percentage = graphene.Float(description="Shipping percentage of the shipping method.")
     minimum_order_price = Decimal(
         description="Minimum order price to use this shipping method"
     )
@@ -25,7 +25,7 @@ class ShippingPriceInput(graphene.InputObjectType):
     maximum_order_weight = WeightScalar(
         description="Maximum order weight to use this shipping method"
     )
-    type = ShippingMethodTypeEnum(description="Shipping type: price or weight based.")
+    type = ShippingMethodTypeEnum(description="Shipping type: price or weight based or percentage based.")
     shipping_zone = graphene.ID(
         description="Shipping zone this method belongs to.", name="shippingZone"
     )
@@ -107,7 +107,7 @@ class ShippingPriceMixin:
         cleaned_input = super().clean_input(info, instance, data)
         cleaned_type = cleaned_input.get("type")
         if cleaned_type:
-            if cleaned_type == ShippingMethodTypeEnum.PRICE.value:
+            if cleaned_type == ShippingMethodTypeEnum.PRICE.value or cleaned_type == ShippingMethodTypeEnum.PERCENTAGE.value :
                 min_price = cleaned_input.get("minimum_order_price")
                 max_price = cleaned_input.get("maximum_order_price")
                 if (

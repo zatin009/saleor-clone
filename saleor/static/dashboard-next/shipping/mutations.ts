@@ -136,7 +136,6 @@ export const TypedUpdateShippingZone = TypedMutation<
   UpdateShippingZoneVariables
 >(updateShippingZone);
 
-console.log("############### shippingMethodFragment : ",shippingMethodFragment)
 const updateShippingRate = gql`
   ${shippingMethodFragment}
   mutation UpdateShippingRate($id: ID!, $input: ShippingPriceInput!) {

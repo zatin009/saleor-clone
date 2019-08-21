@@ -212,7 +212,7 @@ class ShippingMethod(models.Model):
         return self.name
 
     def __repr__(self):
-        if self.type == ShippingMethodType.PRICE_BASED:
+        if self.type == ShippingMethodType.PRICE_BASED or self.type == ShippingMethodType.PERCENTAGE_BASED:
             minimum = "%s%s" % (
                 self.minimum_order_price.amount,
                 self.minimum_order_price.currency,

@@ -1,98 +1,132 @@
-// <ADD
-                  onPercentageRateAdd={() =>
-                    navigate(
-                      shippingZoneUrl(id, {
-                        action: "add-rate",
-                        type: ShippingMethodTypeEnum.PERCENTAGE
-                      })
-                    )
-                  }
-                  onPercentageRateEdit={rateId =>
-                    navigate(
-                      shippingZoneUrl(id, {
-                        action: "edit-rate",
-                        id: rateId
-                      })
-                    )
-                  }
-                  // ADD>
-var x = (day == "yes")
-? "Good Day!"
-: (day == "no")
-? "Good Night!"
-: "";
-
-<TableCell className={classes.valueColumn}>
-              {variant === "price"
-                ? i18n.t("Value Range", { context: "object" })
-                : i18n.t("Weight Range", { context: "object" })}
-            </TableCell>
-
-
-
-
-
-
-
-
-
-                      {renderCollection(
-            rates,
-            rate => (
-              <TableRow
-                hover={!!rate}
-                key={rate ? rate.id : "skeleton"}
-                onClick={!!rate ? () => onRateEdit(rate.id) : undefined}
-              >
-                <TableCell className={classes.nameColumn}>
-                  {maybe<React.ReactNode>(() => rate.name, <Skeleton />)}
-                </TableCell>
-                <TableCell>
-                  {maybe<React.ReactNode>(
-                    () =>
-                      variant === "price" ? (
-                        <MoneyRange
-                          from={rate.minimumOrderPrice}
-                          to={rate.maximumOrderPrice}
-                        />
-                      ) : (
-                        <WeightRange
-                          from={rate.minimumOrderWeight}
-                          to={rate.maximumOrderWeight}
-                        />
-                      ),
-                    <Skeleton />
-                  )}
-                </TableCell>
-                <TableCell>
-                  {maybe<React.ReactNode>(
-                    () => (
-                      <Money money={rate.price} />
-                    ),
-                    <Skeleton />
-                  )}
-                </TableCell>
-                <IconButtonTableCell
-                  disabled={disabled}
-                  onClick={() => onRateEdit(rate.id)}
-                >
-                  <EditIcon />
-                </IconButtonTableCell>
-                <IconButtonTableCell
-                  disabled={disabled}
-                  onClick={() => onRateRemove(rate.id)}
-                >
-                  <DeleteIcon />
-                </IconButtonTableCell>
-              </TableRow>
-            ),
-            () => (
-              <TableRow>
-                <TableCell colSpan={5}>
-                  {i18n.t("No shipping rates found")}
-                </TableCell>
-              </TableRow>
+<ShippingZoneRateDialog
+        action="edit"
+        confirmButtonState={updateRateTransitionState}
+        defaultCurrency={maybe(() => shop.defaultCurrency)}
+        disabled={ops.shippingRateUpdate.opts.loading}
+        errors={maybe(
+          () => ops.shippingRateUpdate.opts.data.shippingPriceUpdate.errors,
+          []
+        )}
+        onClose={closeModal}
+        onSubmit={formData =>
+          ops.shippingRateUpdate.mutate({
+            id: params.id,
+            input: {
+              maximumOrderPrice: formData.noLimits
+                ? null
+                : parseFloat(formData.maxValue),
+              minimumOrderPrice: formData.noLimits
+                ? null
+                : parseFloat(formData.minValue),
+              name: formData.name,
+              price: formData.isFree ? 0 : parseFloat(formData.price),
+              shippingZone: id,
+              type: maybe(() => rate.type)
+            }
+          })
+        }
+        open={params.action === "edit-rate"}
+        rate={rate}
+        variant={maybe(() => rate.type)}
+      />
+      <ActionDialog
+        confirmButtonState={deleteRateTransitionState}
+        onClose={closeModal}
+        onConfirm={() =>
+          ops.shippingRateDelete.mutate({
+            id: params.id
+          })
+        }
+        open={params.action === "remove-rate"}
+        title={i18n.t("Delete Shipping Method")}
+        variant="delete"
+      >
+        <DialogContentText
+          dangerouslySetInnerHTML={{
+            __html: i18n.t(
+              "Are you sure you want to delete <strong>{{ name }}</strong>?",
+              {
+                context: "remove shipping method",
+                name: maybe(() => rate.name, "...")
+              }
             )
-          )}
+          }}
+        />
+      </ActionDialog>
+###################
 
-#############################################
+      {/* <WORKING FUNC >*/}
+      <ShippingZoneRateDialog
+        action="create"
+        confirmButtonState={createRateTransitionState}
+        defaultCurrency={maybe(() => shop.defaultCurrency)}
+        disabled={ops.shippingRateCreate.opts.loading}
+        errors={maybe(
+          () => ops.shippingRateCreate.opts.data.shippingPriceCreate.errors,
+          []
+        )}
+        onClose={closeModal}
+        onSubmit={formData =>
+          ops.shippingRateCreate.mutate({
+            input: {
+              maximumOrderPrice:
+                params.type === ShippingMethodTypeEnum.PRICE
+                  ? formData.noLimits
+                    ? null
+                    : parseFloat(formData.maxValue)
+                  : null,
+              maximumOrderWeight:
+                params.type === ShippingMethodTypeEnum.WEIGHT
+                  ? formData.noLimits
+                    ? null
+                    : parseFloat(formData.maxValue)
+                  : null,
+
+              minimumOrderPrice:
+                params.type === ShippingMethodTypeEnum.PRICE
+                  ? formData.noLimits
+                    ? null
+                    : parseFloat(formData.minValue)
+                  : null,
+              minimumOrderWeight:
+                params.type === ShippingMethodTypeEnum.WEIGHT
+                  ? formData.noLimits
+                    ? null
+                    : parseFloat(formData.minValue)
+                  : null,
+              name: formData.name,
+              price: formData.isFree ? 0 : parseFloat(formData.price),
+              shippingZone: id,
+              type: ShippingMethodTypeEnum.PRICE
+            }
+          })
+        }
+        open={params.action === "add-rate"}
+        rate={undefined}
+        variant={params.type}
+      />
+      {/*<WORKING FUNC/>*/}
+      <ActionDialog
+        confirmButtonState={deleteZoneTransitionState}
+        onClose={closeModal}
+        onConfirm={() =>
+          ops.shippingZoneDelete.mutate({
+            id
+          })
+        }
+        open={params.action === "remove"}
+        title={i18n.t("Delete Shipping Zone")}
+        variant="delete"
+      >
+        <DialogContentText
+          dangerouslySetInnerHTML={{
+            __html: i18n.t(
+              "Are you sure you want to delete <strong>{{ name }}</strong>?",
+              {
+                context: "remove shipping zone",
+                name: maybe(() => shippingZone.name)
+              }
+            )
+          }}
+        />
+      </ActionDialog>

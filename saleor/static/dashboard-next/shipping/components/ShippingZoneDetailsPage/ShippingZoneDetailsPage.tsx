@@ -122,6 +122,7 @@ const ShippingZoneDetailsPage: React.StatelessComponent<
                 variant="price"
               />
               <CardSpacer />
+              {/*<WORKING FUNC*/}
               <ShippingZoneRates
                 disabled={disabled}
                 onRateAdd={onWeightRateAdd}
@@ -134,6 +135,7 @@ const ShippingZoneDetailsPage: React.StatelessComponent<
                 )}
                 variant="weight"
               />
+              {/*WORKING FUNC>*/}
             </div>
           </Grid>
           <SaveButtonBar

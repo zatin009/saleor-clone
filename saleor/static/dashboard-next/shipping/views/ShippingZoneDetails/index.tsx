@@ -24,7 +24,6 @@ export interface ShippingZoneDetailsProps{
   id: string;
   params: ShippingZoneUrlQueryParams;
 }
-
 const ShippingZoneDetails: React.StatelessComponent<ShippingZoneDetailsProps> = ({id, params}) => {
   const navigate = useNavigator();
   const notify = useNotifier();

@@ -1,18 +1,18 @@
 import DialogContentText from "@material-ui/core/DialogContentText";
-import React from "react";
 
 import ActionDialog from "@saleor/components/ActionDialog";
-import { ConfirmButtonTransitionState } from "@saleor/components/ConfirmButton";
+import {ConfirmButtonTransitionState} from "@saleor/components/ConfirmButton";
 import useNavigator from "@saleor/hooks/useNavigator";
 import useShop from "@saleor/hooks/useShop";
+import React from "react";
 import i18n from "../../../i18n";
-import { maybe } from "../../../misc";
-import { ShippingMethodTypeEnum } from "../../../types/globalTypes";
+import {maybe} from "../../../misc";
+import {ShippingMethodTypeEnum} from "../../../types/globalTypes";
 import ShippingZoneCountriesAssignDialog from "../../components/ShippingZoneCountriesAssignDialog";
 import ShippingZoneRateDialog from "../../components/ShippingZoneRateDialog";
-import { ShippingZoneDetailsFragment } from "../../types/ShippingZoneDetailsFragment";
-import { shippingZoneUrl, ShippingZoneUrlQueryParams } from "../../urls";
-import { ShippingZoneOperationsOutput } from "./ShippingZoneOperations";
+import {ShippingZoneDetailsFragment} from "../../types/ShippingZoneDetailsFragment";
+import {shippingZoneUrl, ShippingZoneUrlQueryParams} from "../../urls";
+import {ShippingZoneOperationsOutput} from "./ShippingZoneOperations";
 
 export interface ShippingZoneDetailsDialogsProps {
   assignCountryTransitionState: ConfirmButtonTransitionState;
@@ -107,8 +107,6 @@ const ShippingZoneDetailsDialogs: React.StatelessComponent<
           }}
         />
       </ActionDialog>
-
-      {/* <WORKING FUNC >*/}
       <ShippingZoneRateDialog
         action="create"
         confirmButtonState={createRateTransitionState}
@@ -119,33 +117,34 @@ const ShippingZoneDetailsDialogs: React.StatelessComponent<
           []
         )}
         onClose={closeModal}
+        open={params.action === "add-rate"}
         onSubmit={formData =>
           ops.shippingRateCreate.mutate({
             input: {
               maximumOrderPrice:
                 params.type === ShippingMethodTypeEnum.PRICE
                   ? formData.noLimits
-                    ? null
-                    : parseFloat(formData.maxValue)
+                  ? null
+                  : parseFloat(formData.maxValue)
                   : null,
               maximumOrderWeight:
                 params.type === ShippingMethodTypeEnum.WEIGHT
                   ? formData.noLimits
-                    ? null
-                    : parseFloat(formData.maxValue)
+                  ? null
+                  : parseFloat(formData.maxValue)
                   : null,
 
               minimumOrderPrice:
                 params.type === ShippingMethodTypeEnum.PRICE
                   ? formData.noLimits
-                    ? null
-                    : parseFloat(formData.minValue)
+                  ? null
+                  : parseFloat(formData.minValue)
                   : null,
               minimumOrderWeight:
                 params.type === ShippingMethodTypeEnum.WEIGHT
                   ? formData.noLimits
-                    ? null
-                    : parseFloat(formData.minValue)
+                  ? null
+                  : parseFloat(formData.minValue)
                   : null,
               name: formData.name,
               price: formData.isFree ? 0 : parseFloat(formData.price),
@@ -154,11 +153,9 @@ const ShippingZoneDetailsDialogs: React.StatelessComponent<
             }
           })
         }
-        open={params.action === "add-rate"}
         rate={undefined}
         variant={params.type}
       />
-      {/*<WORKING FUNC/>*/}
       <ActionDialog
         confirmButtonState={deleteZoneTransitionState}
         onClose={closeModal}
