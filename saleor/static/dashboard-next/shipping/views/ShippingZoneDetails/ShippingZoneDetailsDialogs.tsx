@@ -27,20 +27,18 @@ export interface ShippingZoneDetailsDialogsProps {
   updateRateTransitionState: ConfirmButtonTransitionState;
 }
 
-const ShippingZoneDetailsDialogs: React.StatelessComponent<
-  ShippingZoneDetailsDialogsProps
-> = ({
-  assignCountryTransitionState,
-  createRateTransitionState,
-  deleteRateTransitionState,
-  deleteZoneTransitionState,
-  id,
-  ops,
-  params,
-  shippingZone,
-  unassignCountryTransitionState,
-  updateRateTransitionState
-}) => {
+const ShippingZoneDetailsDialogs: React.StatelessComponent<ShippingZoneDetailsDialogsProps> = ({
+                                                                                                 assignCountryTransitionState,
+                                                                                                 createRateTransitionState,
+                                                                                                 deleteRateTransitionState,
+                                                                                                 deleteZoneTransitionState,
+                                                                                                 id,
+                                                                                                 ops,
+                                                                                                 params,
+                                                                                                 shippingZone,
+                                                                                                 unassignCountryTransitionState,
+                                                                                                 updateRateTransitionState
+                                                                                               }) => {
   const navigate = useNavigator();
   const shop = useShop();
 
@@ -149,7 +147,10 @@ const ShippingZoneDetailsDialogs: React.StatelessComponent<
               name: formData.name,
               price: formData.isFree ? 0 : parseFloat(formData.price),
               shippingZone: id,
-              type: ShippingMethodTypeEnum.PRICE
+              type:
+                params.type === ShippingMethodTypeEnum.WEIGHT
+                  ? ShippingMethodTypeEnum.WEIGHT
+                  : ShippingMethodTypeEnum.PRICE
             }
           })
         }
