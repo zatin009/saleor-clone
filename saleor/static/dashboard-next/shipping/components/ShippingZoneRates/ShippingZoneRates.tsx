@@ -22,9 +22,9 @@ import MoneyRange from "@saleor/components/MoneyRange";
 import Skeleton from "@saleor/components/Skeleton";
 import WeightRange from "@saleor/components/WeightRange";
 import i18n from "../../../i18n";
-import { maybe, renderCollection } from "../../../misc";
-import { ICONBUTTON_SIZE } from "../../../theme";
-import { ShippingZoneDetailsFragment_shippingMethods } from "../../types/ShippingZoneDetailsFragment";
+import {maybe, renderCollection} from "../../../misc";
+import {ICONBUTTON_SIZE} from "../../../theme";
+import {ShippingZoneDetailsFragment_shippingMethods} from "../../types/ShippingZoneDetailsFragment";
 
 export interface ShippingZoneRatesProps {
   disabled: boolean;
@@ -48,26 +48,26 @@ const styles = (theme: Theme) =>
       width: 300
     },
     valueColumn: {
-      width:300
+      width: 300
     }
   });
-const ShippingZoneRates = withStyles(styles, { name: "ShippingZoneRates" })(
+const ShippingZoneRates = withStyles(styles, {name: "ShippingZoneRates"})(
   ({
-    classes,
-    disabled,
-    onRateAdd,
-    onRateEdit,
-    onRateRemove,
-    rates,
-    variant
-  }: ShippingZoneRatesProps & WithStyles<typeof styles>) => (
+     classes,
+     disabled,
+     onRateAdd,
+     onRateEdit,
+     onRateRemove,
+     rates,
+     variant
+   }: ShippingZoneRatesProps & WithStyles<typeof styles>) => (
     <Card>
       <CardTitle
         height="const"
         title={
           (variant === "percentage"
             ? i18n.t("Percentage Based Rates")
-            :variant === "price"
+            : variant === "price"
               ? i18n.t("Price Based Rates")
               : i18n.t("Weight Based Rates"))
         }
@@ -83,23 +83,22 @@ const ShippingZoneRates = withStyles(styles, { name: "ShippingZoneRates" })(
         <TableHead>
           <TableRow>
             <TableCell className={classes.nameColumn}>
-              {i18n.t("Name", { context: "object" })}
+              {i18n.t("Name", {context: "object"})}
             </TableCell>
             <TableCell className={classes.valueColumn}>
               {variant === "weight"
-                ? i18n.t("Weight Range", { context: "object" })
-                : i18n.t("Value Range", { context: "object" })}
+                ? i18n.t("Weight Range", {context: "object"})
+                : i18n.t("Value Range", {context: "object"})}
             </TableCell>
             <TableCell className={classes.nameColumn}>
               {variant === "percentage"
-                ? i18n.t("Percentage", { context: "object" })
-                : i18n.t("Price", { context: "object" })}
+                ? i18n.t("Percentage", {context: "object"})
+                : i18n.t("Price", {context: "object"})}
             </TableCell>
-            <TableCell />
-            <TableCell />
+            <TableCell/>
+            <TableCell/>
           </TableRow>
         </TableHead>
-        {/*< Working Area*/}
         <TableBody>
           {renderCollection(
             rates,
@@ -110,7 +109,7 @@ const ShippingZoneRates = withStyles(styles, { name: "ShippingZoneRates" })(
                 onClick={!!rate ? () => onRateEdit(rate.id) : undefined}
               >
                 <TableCell className={classes.nameColumn}>
-                  {maybe<React.ReactNode>(() => rate.name, <Skeleton />)}
+                  {maybe<React.ReactNode>(() => rate.name, <Skeleton/>)}
                 </TableCell>
                 <TableCell>
                   {maybe<React.ReactNode>(
@@ -126,28 +125,31 @@ const ShippingZoneRates = withStyles(styles, { name: "ShippingZoneRates" })(
                           to={rate.maximumOrderPrice}
                         />
                       ),
-                    <Skeleton />
+                    <Skeleton/>
                   )}
                 </TableCell>
                 <TableCell>
                   {maybe<React.ReactNode>(
-                    () => (
-                      <Money money={rate.price} />
-                    ),
-                    <Skeleton />
+                    () =>
+                      variant === "percentage" ? (
+                        rate.percentage + " %"
+                      ) : (
+                        <Money money={rate.price}/>
+                      ),
+                    <Skeleton/>
                   )}
                 </TableCell>
                 <IconButtonTableCell
                   disabled={disabled}
                   onClick={() => onRateEdit(rate.id)}
                 >
-                  <EditIcon />
+                  <EditIcon/>
                 </IconButtonTableCell>
                 <IconButtonTableCell
                   disabled={disabled}
                   onClick={() => onRateRemove(rate.id)}
                 >
-                  <DeleteIcon />
+                  <DeleteIcon/>
                 </IconButtonTableCell>
               </TableRow>
             ),

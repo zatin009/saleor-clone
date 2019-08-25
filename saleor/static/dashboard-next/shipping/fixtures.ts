@@ -1567,6 +1567,7 @@ export const shippingZone: ShippingZoneDetailsFragment = {
         value: 0
       },
       name: "DB Schenker",
+      percentage: null,
       price: {
         __typename: "Money",
         amount: 45.93,
@@ -1590,6 +1591,7 @@ export const shippingZone: ShippingZoneDetailsFragment = {
         value: 0
       },
       name: "Registred priority",
+      percentage : null,
       price: {
         __typename: "Money",
         amount: 73.87,
@@ -1614,6 +1616,7 @@ export const shippingZone: ShippingZoneDetailsFragment = {
       },
 
       name: "UPS",
+      percentage : null,
       price: {
         __typename: "Money",
         amount: 48.11,
@@ -1637,6 +1640,7 @@ export const shippingZone: ShippingZoneDetailsFragment = {
         value: 0
       },
       name: "DHL",
+      percentage: null,
       price: {
         __typename: "Money",
         amount: 95.24,

@@ -67,7 +67,7 @@ const ShippingZoneDetailsPage: React.StatelessComponent<
     <Form errors={errors} initial={initialForm} onSubmit={onSubmit}>
       {({ change, data, errors: formErrors, hasChanged, submit }) => (
         <Container>
-          <AppHeader onBack={onBack}>{i18n.t("Shipping")}</AppHeader>
+          <AppHeader onBack={onBack}>{i18n.t(" Logistic ")}</AppHeader>
           <PageHeader title={maybe(() => shippingZone.name)} />
           <Grid>
             <div>
@@ -103,7 +103,7 @@ const ShippingZoneDetailsPage: React.StatelessComponent<
                 onRateRemove={onRateRemove}
                 rates={maybe(() =>
                   shippingZone.shippingMethods.filter(
-                    method => method.type === ShippingMethodTypeEnum.PRICE
+                    method => method.type === ShippingMethodTypeEnum.PERCENTAGE
                   )
                 )}
                 variant="percentage"
@@ -122,7 +122,6 @@ const ShippingZoneDetailsPage: React.StatelessComponent<
                 variant="price"
               />
               <CardSpacer />
-              {/*<WORKING FUNC*/}
               <ShippingZoneRates
                 disabled={disabled}
                 onRateAdd={onWeightRateAdd}
@@ -135,7 +134,6 @@ const ShippingZoneDetailsPage: React.StatelessComponent<
                 )}
                 variant="weight"
               />
-              {/*WORKING FUNC>*/}
             </div>
           </Grid>
           <SaveButtonBar

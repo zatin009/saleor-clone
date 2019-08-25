@@ -60,6 +60,7 @@ export interface CreateShippingRate_shippingPriceCreate_shippingZone_shippingMet
   name: string;
   price: CreateShippingRate_shippingPriceCreate_shippingZone_shippingMethods_price | null;
   type: ShippingMethodTypeEnum | null;
+  percentage: number | null;
 }
 
 export interface CreateShippingRate_shippingPriceCreate_shippingZone {

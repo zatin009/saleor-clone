@@ -48,4 +48,5 @@ export interface ShippingMethodFragment {
   name: string;
   price: ShippingMethodFragment_price | null;
   type: ShippingMethodTypeEnum | null;
+  percentage: number | null;
 }

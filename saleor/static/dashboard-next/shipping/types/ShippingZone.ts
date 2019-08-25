@@ -54,6 +54,7 @@ export interface ShippingZone_shippingZone_shippingMethods {
   name: string;
   price: ShippingZone_shippingZone_shippingMethods_price | null;
   type: ShippingMethodTypeEnum | null;
+  percentage: number | null;
 }
 
 export interface ShippingZone_shippingZone {

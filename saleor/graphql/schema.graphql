@@ -3102,6 +3102,7 @@ type ShippingMethod implements Node {
   id: ID!
   name: String!
   price: Money
+  percentage: Float
   minimumOrderPrice: Money
   maximumOrderPrice: Money
   minimumOrderWeight: Weight
@@ -3119,6 +3120,7 @@ type ShippingMethodTranslation implements Node {
 enum ShippingMethodTypeEnum {
   PRICE
   WEIGHT
+  PERCENTAGE
 }
 
 type ShippingPriceBulkDelete {
@@ -3141,6 +3143,7 @@ type ShippingPriceDelete {
 input ShippingPriceInput {
   name: String
   price: Decimal
+  percentage: Decimal
   minimumOrderPrice: Decimal
   maximumOrderPrice: Decimal
   minimumOrderWeight: WeightScalar

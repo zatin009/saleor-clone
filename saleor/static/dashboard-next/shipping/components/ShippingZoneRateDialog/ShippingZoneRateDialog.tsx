@@ -22,10 +22,10 @@ import FormSpacer from "@saleor/components/FormSpacer";
 import Hr from "@saleor/components/Hr";
 import Skeleton from "@saleor/components/Skeleton";
 import i18n from "../../../i18n";
-import { maybe } from "../../../misc";
-import { FormErrors, UserError } from "../../../types";
-import { ShippingMethodTypeEnum } from "../../../types/globalTypes";
-import { ShippingZoneDetailsFragment_shippingMethods } from "../../types/ShippingZoneDetailsFragment";
+import {maybe} from "../../../misc";
+import {FormErrors, UserError} from "../../../types";
+import {ShippingMethodTypeEnum} from "../../../types/globalTypes";
+import {ShippingZoneDetailsFragment_shippingMethods} from "../../types/ShippingZoneDetailsFragment";
 
 export interface FormData {
   name: string;
@@ -33,6 +33,7 @@ export interface FormData {
   minValue: string;
   maxValue: string;
   isFree: boolean;
+  percentage : string;
   price: string;
 }
 
@@ -65,42 +66,44 @@ const ShippingZoneRateDialog = withStyles(styles, {
   name: "ShippingZoneRateDialog"
 })(
   ({
-    action,
-    classes,
-    confirmButtonState,
-    defaultCurrency,
-    disabled,
-    errors,
-    onClose,
-    onSubmit,
-    open,
-    rate,
-    variant
-  }: ShippingZoneRateDialogProps & WithStyles<typeof styles>) => {
+     action,
+     classes,
+     confirmButtonState,
+     defaultCurrency,
+     disabled,
+     errors,
+     onClose,
+     onSubmit,
+     open,
+     rate,
+     variant
+   }: ShippingZoneRateDialogProps & WithStyles<typeof styles>) => {
     const initialForm: FormData =
       action === "create"
         ? {
-            isFree: false,
-            maxValue: "",
-            minValue: "",
-            name: "",
-            noLimits: false,
-            price: ""
-          }
+          isFree: false,
+          maxValue: "",
+          minValue: "",
+          name: "",
+          noLimits: false,
+          percentage : "" || null,
+          price: "",
+        }
         : {
-            isFree: maybe(() => rate.price.amount === 0, false),
-            maxValue:
-              variant === ShippingMethodTypeEnum.PRICE
-                ? maybe(() => rate.maximumOrderPrice.amount.toString(), "")
-                : maybe(() => rate.maximumOrderWeight.value.toString(), ""),
-            minValue:
-              variant === ShippingMethodTypeEnum.PRICE
-                ? maybe(() => rate.minimumOrderPrice.amount.toString(), "")
-                : maybe(() => rate.minimumOrderWeight.value.toString(), ""),
-            name: maybe(() => rate.name, ""),
-            noLimits: false,
-            price: maybe(() => rate.price.amount.toString(), "")
-          };
+          isFree: maybe(() => rate.price.amount === 0, false),
+          maxValue:
+            variant === ShippingMethodTypeEnum.PRICE || variant === ShippingMethodTypeEnum.PERCENTAGE
+              ? maybe(() => rate.maximumOrderPrice.amount.toString(), "")
+              : maybe(() => rate.maximumOrderWeight.value.toString(), ""),
+          minValue:
+            variant === ShippingMethodTypeEnum.PRICE || variant === ShippingMethodTypeEnum.PERCENTAGE
+              ? maybe(() => rate.minimumOrderPrice.amount.toString(), "")
+              : maybe(() => rate.minimumOrderWeight.value.toString(), ""),
+          name: maybe(() => rate.name, ""),
+          noLimits: false,
+          percentage : maybe(() => rate.percentage.toString(),null),
+          price: maybe(() => rate.price.amount.toString(), "")
+        };
     if (action === "edit") {
       initialForm.noLimits = !initialForm.maxValue && !initialForm.minValue;
     }
@@ -108,15 +111,14 @@ const ShippingZoneRateDialog = withStyles(styles, {
     return (
       <Dialog onClose={onClose} open={open} fullWidth maxWidth="sm">
         <Form errors={errors} initial={initialForm} onSubmit={onSubmit}>
-          {({ change, data, errors: formErrors, hasChanged }) => {
+          {({change, data, errors: formErrors, hasChanged}) => {
             const typedFormErrors: FormErrors<
               | "minimumOrderPrice"
               | "minimumOrderWeight"
               | "maximumOrderPrice"
               | "maximumOrderWeight"
               | "price"
-              | "name"
-            > = formErrors;
+              | "name"> = formErrors;
             return (
               <>
                 <DialogTitle>
@@ -124,13 +126,13 @@ const ShippingZoneRateDialog = withStyles(styles, {
                     ? action === "create"
                       ? i18n.t("Add Percentage Rate")
                       : i18n.t("Edit Percentage Rate")
-                  :variant === ShippingMethodTypeEnum.PRICE
-                  ? action === "create"
-                    ? i18n.t("Add Price Rate")
-                    : i18n.t("Edit Price Rate")
-                  : action === "create"
-                  ? i18n.t("Add Weight Rate")
-                  : i18n.t("Edit Weight Rate")}
+                    : variant === ShippingMethodTypeEnum.PRICE
+                      ? action === "create"
+                        ? i18n.t("Add Price Rate")
+                        : i18n.t("Edit Price Rate")
+                      : action === "create"
+                        ? i18n.t("Add Weight Rate")
+                        : i18n.t("Edit Weight Rate")}
                 </DialogTitle>
                 <DialogContent>
                   <TextField
@@ -147,7 +149,7 @@ const ShippingZoneRateDialog = withStyles(styles, {
                     onChange={change}
                   />
                 </DialogContent>
-                <Hr />
+                <Hr/>
                 <DialogContent>
                   {!!variant ? (
                     <>
@@ -155,7 +157,7 @@ const ShippingZoneRateDialog = withStyles(styles, {
                         className={classes.subheading}
                         variant="subtitle1"
                       >
-                        {variant === ShippingMethodTypeEnum.PRICE
+                        {variant === ShippingMethodTypeEnum.PRICE || variant === ShippingMethodTypeEnum.PERCENTAGE
                           ? i18n.t("Value range")
                           : i18n.t("Weight range")}
                       </Typography>
@@ -167,40 +169,40 @@ const ShippingZoneRateDialog = withStyles(styles, {
                           <>
                             {i18n.t("There are no value limits")}
                             <Typography variant="caption">
-                              {variant === ShippingMethodTypeEnum.PRICE
+                              {variant === ShippingMethodTypeEnum.PRICE || variant === ShippingMethodTypeEnum.PERCENTAGE
                                 ? i18n.t(
-                                    "This rate will apply to all orders of all prices"
-                                  )
+                                  "This rate will apply to all orders of all prices"
+                                )
                                 : i18n.t(
-                                    "This rate will apply to all orders of all weights"
-                                  )}
+                                  "This rate will apply to all orders of all weights"
+                                )}
                             </Typography>
                           </>
                         }
                       />
                       {!data.noLimits && (
                         <>
-                          <FormSpacer />
+                          <FormSpacer/>
                           <div className={classes.grid}>
                             <TextField
                               disabled={disabled}
                               error={
-                                variant === ShippingMethodTypeEnum.PRICE
+                                variant === ShippingMethodTypeEnum.PRICE || variant === ShippingMethodTypeEnum.PERCENTAGE
                                   ? !!typedFormErrors.minimumOrderPrice
                                   : !!typedFormErrors.minimumOrderWeight
                               }
                               fullWidth
                               helperText={
-                                variant === ShippingMethodTypeEnum.PRICE
+                                variant === ShippingMethodTypeEnum.PRICE || variant === ShippingMethodTypeEnum.PERCENTAGE
                                   ? typedFormErrors.minimumOrderPrice
                                   : typedFormErrors.minimumOrderWeight
                               }
                               label={
-                                variant === ShippingMethodTypeEnum.PRICE
+                                variant === ShippingMethodTypeEnum.PRICE || variant === ShippingMethodTypeEnum.PERCENTAGE
                                   ? typedFormErrors.minimumOrderPrice ||
-                                    i18n.t("Minimal Order Value")
+                                  i18n.t("Minimal Order Value")
                                   : typedFormErrors.minimumOrderWeight ||
-                                    i18n.t("Minimal Order Weight")
+                                  i18n.t("Minimal Order Weight")
                               }
                               name={"minValue" as keyof FormData}
                               type="number"
@@ -210,22 +212,22 @@ const ShippingZoneRateDialog = withStyles(styles, {
                             <TextField
                               disabled={disabled}
                               error={
-                                variant === ShippingMethodTypeEnum.PRICE
+                                variant === ShippingMethodTypeEnum.PRICE || variant === ShippingMethodTypeEnum.PERCENTAGE
                                   ? !!typedFormErrors.maximumOrderPrice
                                   : !!typedFormErrors.maximumOrderWeight
                               }
                               fullWidth
                               helperText={
-                                variant === ShippingMethodTypeEnum.PRICE
+                                variant === ShippingMethodTypeEnum.PRICE || variant === ShippingMethodTypeEnum.PERCENTAGE
                                   ? typedFormErrors.maximumOrderPrice
                                   : typedFormErrors.maximumOrderWeight
                               }
                               label={
-                                variant === ShippingMethodTypeEnum.PRICE
+                                variant === ShippingMethodTypeEnum.PRICE || variant === ShippingMethodTypeEnum.PERCENTAGE
                                   ? typedFormErrors.maximumOrderPrice ||
-                                    i18n.t("Maximal Order Value")
+                                  i18n.t("Maximal Order Value")
                                   : typedFormErrors.maximumOrderWeight ||
-                                    i18n.t("Maximal Order Weight")
+                                  i18n.t("Maximal Order Weight")
                               }
                               name={"maxValue" as keyof FormData}
                               type="number"
@@ -237,16 +239,20 @@ const ShippingZoneRateDialog = withStyles(styles, {
                       )}
                     </>
                   ) : (
-                    <Skeleton />
+                    <Skeleton/>
                   )}
                 </DialogContent>
-                <Hr />
+                <Hr/>
+                {/*Working Func*/}
                 <DialogContent>
                   <Typography
                     className={classes.subheading}
                     variant="subtitle1"
                   >
-                    {i18n.t("Rate")}
+                    {variant === ShippingMethodTypeEnum.PERCENTAGE
+                      ? i18n.t("Percentage Rate")
+                      : i18n.t("Rate Price")
+                    }
                   </Typography>
                   <ControlledSwitch
                     checked={data.isFree}
@@ -257,14 +263,26 @@ const ShippingZoneRateDialog = withStyles(styles, {
                   />
                   {!data.isFree && (
                     <>
-                      <FormSpacer />
+                      <FormSpacer/>
                       <div className={classes.grid}>
-                        <TextField
+                        {variant === ShippingMethodTypeEnum.PERCENTAGE
+                        ? <TextField
+                          disabled={disabled}
+                          error={!!typedFormErrors.price}
+                          fullWidth
+                          helperText={typedFormErrors.price || i18n.t("Percentage Value must be lower than 100")}
+                          label={i18n.t("Percentage Rate")}
+                          name={"percentage" as keyof FormData}
+                          type="number"
+                          value={data.percentage}
+                          onChange={change}
+                          />
+                        : <TextField
                           disabled={disabled}
                           error={!!typedFormErrors.price}
                           fullWidth
                           helperText={typedFormErrors.price}
-                          label={i18n.t("Rate Price")}
+                          label={i18n.t("Price Rate")}
                           name={"price" as keyof FormData}
                           type="number"
                           value={data.price}
@@ -272,14 +290,15 @@ const ShippingZoneRateDialog = withStyles(styles, {
                           InputProps={{
                             endAdornment: defaultCurrency
                           }}
-                        />
+                        />}
                       </div>
                     </>
                   )}
                 </DialogContent>
+                {/*Working Func*/}
                 <DialogActions>
                   <Button onClick={onClose}>
-                    {i18n.t("Cancel", { context: "button" })}
+                    {i18n.t("Cancel", {context: "button"})}
                   </Button>
                   <ConfirmButton
                     disabled={disabled || !hasChanged}
@@ -289,8 +308,8 @@ const ShippingZoneRateDialog = withStyles(styles, {
                     type="submit"
                   >
                     {action === "create"
-                      ? i18n.t("Create rate", { context: "button" })
-                      : i18n.t("Update rate", { context: "button" })}
+                      ? i18n.t("Create rate", {context: "button"})
+                      : i18n.t("Update rate", {context: "button"})}
                   </ConfirmButton>
                 </DialogActions>
               </>

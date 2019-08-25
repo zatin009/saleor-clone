@@ -54,6 +54,7 @@ export interface UpdateShippingRate_shippingPriceUpdate_shippingMethod {
   name: string;
   price: UpdateShippingRate_shippingPriceUpdate_shippingMethod_price | null;
   type: ShippingMethodTypeEnum | null;
+  percentage: number | null;
 }
 
 export interface UpdateShippingRate_shippingPriceUpdate {

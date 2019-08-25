@@ -166,9 +166,11 @@ class ShippingMethod(models.Model):
         max_digits=settings.DEFAULT_MAX_DIGITS,
         decimal_places=settings.DEFAULT_DECIMAL_PLACES,
         default=0,
+        blank=True,
+        null=True,
     )
     # <ADD
-    percentage = models.DecimalField(null=True, blank=True, default=None,
+    percentage = models.DecimalField(null=True, blank=True,
                                      max_digits=5, decimal_places=2,
                                      validators=[MinValueValidator(0), MaxValueValidator(100)])
     # ADD>

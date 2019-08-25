@@ -71,6 +71,7 @@ const ShippingZoneDetailsDialogs: React.StatelessComponent<ShippingZoneDetailsDi
                 ? null
                 : parseFloat(formData.minValue),
               name: formData.name,
+              percentage : formData.percentage,
               price: formData.isFree ? 0 : parseFloat(formData.price),
               shippingZone: id,
               type: maybe(() => rate.type)
@@ -120,7 +121,7 @@ const ShippingZoneDetailsDialogs: React.StatelessComponent<ShippingZoneDetailsDi
           ops.shippingRateCreate.mutate({
             input: {
               maximumOrderPrice:
-                params.type === ShippingMethodTypeEnum.PRICE
+                params.type === ShippingMethodTypeEnum.PRICE || params.type === ShippingMethodTypeEnum.PERCENTAGE
                   ? formData.noLimits
                   ? null
                   : parseFloat(formData.maxValue)
@@ -133,7 +134,7 @@ const ShippingZoneDetailsDialogs: React.StatelessComponent<ShippingZoneDetailsDi
                   : null,
 
               minimumOrderPrice:
-                params.type === ShippingMethodTypeEnum.PRICE
+                params.type === ShippingMethodTypeEnum.PRICE || params.type === ShippingMethodTypeEnum.PERCENTAGE
                   ? formData.noLimits
                   ? null
                   : parseFloat(formData.minValue)
@@ -145,11 +146,14 @@ const ShippingZoneDetailsDialogs: React.StatelessComponent<ShippingZoneDetailsDi
                   : parseFloat(formData.minValue)
                   : null,
               name: formData.name,
+              percentage: formData.percentage,
               price: formData.isFree ? 0 : parseFloat(formData.price),
               shippingZone: id,
               type:
                 params.type === ShippingMethodTypeEnum.WEIGHT
                   ? ShippingMethodTypeEnum.WEIGHT
+                  : params.type === ShippingMethodTypeEnum.PERCENTAGE
+                  ? ShippingMethodTypeEnum.PERCENTAGE
                   : ShippingMethodTypeEnum.PRICE
             }
           })

@@ -130,3 +130,59 @@
           }}
         />
       </ActionDialog>
+#################################################
+label = {
+                            variant === ShippingMethodTypeEnum.PERCENTAGE
+                            ? i18n.t("Percentage Rate")
+                            : i18n.t ("Rate Price")
+                          }
+
+##################################################
+<TextField
+                          disabled={disabled}
+                          error={!!typedFormErrors.price}
+                          fullWidth
+                          helperText={typedFormErrors.price}
+                          label={ variant === ShippingMethodTypeEnum.PERCENTAGE
+                              ? i18n.t("Percentage Rate")
+                              : i18n.t("Rate Price")
+                          }
+                          name={ variant === ShippingMethodTypeEnum.PERCENTAGE
+                            ? "price" as keyof FormData
+                            : "percentage" as keyof FormData
+                          }
+                          type="number"
+                          value={data.price}
+                          onChange={change}
+                          InputProps={{
+                            endAdornment: defaultCurrency
+                          }}
+                        />
+#####################################################
+<div className={classes.grid}>
+                        {variant === ShippingMethodTypeEnum.PERCENTAGE
+                        ? <TextField
+                          disabled={disabled}
+                          error={!!typedFormErrors.percentage}
+                          fullWidth
+                          helperText={typedFormErrors.percentage}
+                          label={i18n.t("Percentage Rate")}
+                          name={"percentage" as keyof FormData}
+                          type="number"
+                          value={data.price}
+                          onChange={change}
+                          />
+                        : <TextField
+                          disabled={disabled}
+                          error={!!typedFormErrors.price}
+                          fullWidth
+                          helperText={typedFormErrors.price}
+                          label={i18n.t("Price Rate")}
+                          name={"price" as keyof FormData}
+                          type="number"
+                          value={data.price}
+                          onChange={change}
+                          InputProps={{
+                            endAdornment: defaultCurrency
+                          }}
+                        />}

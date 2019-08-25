@@ -60,6 +60,7 @@ export interface DeleteShippingRate_shippingPriceDelete_shippingZone_shippingMet
   name: string;
   price: DeleteShippingRate_shippingPriceDelete_shippingZone_shippingMethods_price | null;
   type: ShippingMethodTypeEnum | null;
+  percentage: number | null;
 }
 
 export interface DeleteShippingRate_shippingPriceDelete_shippingZone {

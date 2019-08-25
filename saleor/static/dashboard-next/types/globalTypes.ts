@@ -176,9 +176,9 @@ export enum SaleType {
 }
 
 export enum ShippingMethodTypeEnum {
+  PERCENTAGE = "PERCENTAGE",
   PRICE = "PRICE",
   WEIGHT = "WEIGHT",
-  PERCENTAGE="PERCENTAGE"
 }
 
 export enum StockAvailability {
@@ -529,6 +529,7 @@ export interface SeoInput {
 export interface ShippingPriceInput {
   name?: string | null;
   price?: any | null;
+  percentage?: any | null;
   minimumOrderPrice?: any | null;
   maximumOrderPrice?: any | null;
   minimumOrderWeight?: any | null;
