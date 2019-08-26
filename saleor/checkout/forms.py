@@ -297,6 +297,11 @@ class ShippingMethodChoiceField(forms.ModelChoiceField):
 
     def label_from_instance(self, obj):
         """Return a friendly label for the shipping method."""
+        # <ADD
+        if obj.type == "percentage":
+            percen_str = str(obj.percentage) + " %"
+            return mark_safe("%s %s " % (obj.name,percen_str))
+        # ADD>
         if display_gross_prices():
             price = self.extensions.apply_taxes_to_shipping(
                 obj.price, shipping_address=self.shipping_address

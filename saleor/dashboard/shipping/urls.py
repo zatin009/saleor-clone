@@ -14,11 +14,13 @@ urlpatterns = [
         views.shipping_zone_delete,
         name="shipping-zone-delete",
     ),
+    # <ADD percentage
     url(
-        r"^(?P<shipping_zone_pk>\d+)/shipping/add/(?P<type>price|weight)/$",
+        r"^(?P<shipping_zone_pk>\d+)/shipping/add/(?P<type>price|weight|percentage)/$",
         views.shipping_method_add,
         name="shipping-method-add",
     ),
+    # ADD>
     url(
         r"^(?P<shipping_zone_pk>\d+)/shipping/(?P<shipping_method_pk>\d+)/update/$",  # noqa
         views.shipping_method_edit,

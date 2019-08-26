@@ -150,21 +150,16 @@ def checkout_index(request, checkout):
 
     default_country = get_user_shipping_country(request)
     country_form = CountryForm(initial={"country": default_country})
-    shipping_price_range = get_shipping_price_estimate(
-        checkout, discounts, country_code=default_country
-    )
 
     context = get_checkout_context(
         checkout,
         discounts,
         currency=request.currency,
-        shipping_range=shipping_price_range,
     )
     context.update(
         {
             "checkout_lines": checkout_lines,
             "country_form": country_form,
-            "shipping_price_range": shipping_price_range,
         }
     )
     return TemplateResponse(request, "checkout/index.html", context)

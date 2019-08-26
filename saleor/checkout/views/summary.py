@@ -82,6 +82,7 @@ def summary_with_shipping_view(request, checkout):
         return _handle_order_placement(request, checkout)
 
     ctx = get_checkout_context(checkout, request.discounts)
+
     ctx.update(
         {
             "additional_addresses": user_addresses,

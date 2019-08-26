@@ -1,6 +1,6 @@
-import { ShippingMethodTypeEnum } from "../types/globalTypes";
-import { ShippingZoneDetailsFragment } from "./types/ShippingZoneDetailsFragment";
-import { ShippingZoneFragment } from "./types/ShippingZoneFragment";
+import {ShippingMethodTypeEnum} from "../types/globalTypes";
+import {ShippingZoneDetailsFragment} from "./types/ShippingZoneDetailsFragment";
+import {ShippingZoneFragment} from "./types/ShippingZoneFragment";
 
 export const shippingZones: ShippingZoneFragment[] = [
   {
@@ -1591,7 +1591,7 @@ export const shippingZone: ShippingZoneDetailsFragment = {
         value: 0
       },
       name: "Registred priority",
-      percentage : null,
+      percentage: null,
       price: {
         __typename: "Money",
         amount: 73.87,
@@ -1616,7 +1616,7 @@ export const shippingZone: ShippingZoneDetailsFragment = {
       },
 
       name: "UPS",
-      percentage : null,
+      percentage: null,
       price: {
         __typename: "Money",
         amount: 48.11,

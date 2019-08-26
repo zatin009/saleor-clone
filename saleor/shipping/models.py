@@ -23,7 +23,7 @@ from ..core.weight import (
 )
 from . import ShippingMethodType
 # <ADD
-from django.core.validators import MaxValueValidator,MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 # ADD>
 
 def _applicable_weight_based_methods(weight, qs):
@@ -42,6 +42,17 @@ def _applicable_price_based_methods(price, qs):
     no_price_limit = Q(maximum_order_price__isnull=True)
     max_price_matched = Q(maximum_order_price__gte=price)
     return qs.filter(min_price_matched & (no_price_limit | max_price_matched))
+
+#<ADD
+def applicable_percentage_based_methods(price,qs):
+    """Return price based shipping methods that are applicable for the given total."""
+    qs = qs.percentage_based()
+    min_price_matched = Q(minimum_order_price__lte=price)
+    no_price_limit = Q(maximum_order_price__isnull=True)
+    max_price_matched = Q(maximum_order_price__gte=price)
+    return qs.filter(
+        min_price_matched & (no_price_limit | max_price_matched))
+# ADD>
 
 
 def _get_price_type_display(min_price, max_price):
@@ -121,6 +132,10 @@ class ShippingMethodQueryset(models.QuerySet):
 
     def weight_based(self):
         return self.filter(type=ShippingMethodType.WEIGHT_BASED)
+    # <ADD
+    def percentage_based(self):
+        return self.filter(type=ShippingMethodType.PERCENTAGE_BASED)
+    # ADD>
 
     def applicable_shipping_methods(self, price, weight, country_code):
         """Return the ShippingMethods that can be used on an order with shipment.
@@ -141,10 +156,13 @@ class ShippingMethodQueryset(models.QuerySet):
         qs = qs.prefetch_related("shipping_zone").order_by("price")
         price_based_methods = _applicable_price_based_methods(price, qs)
         weight_based_methods = _applicable_weight_based_methods(weight, qs)
-        return price_based_methods | weight_based_methods
+        # <ADD
+        percentage_based_methods = applicable_percentage_based_methods(price, qs)
+        # ADD>
+        return price_based_methods | weight_based_methods | percentage_based_methods
 
     def applicable_shipping_methods_for_instance(
-        self, instance: Union["Checkout", "Order"], price, country_code=None
+            self, instance: Union["Checkout", "Order"], price, country_code=None
     ):
         if not instance.is_shipping_required():
             return None
@@ -246,13 +264,16 @@ class ShippingMethod(models.Model):
         return label
 
     def get_type_display(self):
-        if self.type == ShippingMethodType.PRICE_BASED:
+        # <ADD or self.type == ShippingMethodType.PERCENTAGE_BASED in if
+        if self.type == ShippingMethodType.PRICE_BASED or self.type == ShippingMethodType.PERCENTAGE_BASED:
             return _get_price_type_display(
                 self.minimum_order_price, self.maximum_order_price
             )
         return _get_weight_type_display(
             self.minimum_order_weight, self.maximum_order_weight
         )
+        # ADD or self.type == ShippingMethodType.PERCENTAGE_BASED in if>
+
 
 
 class ShippingMethodTranslation(models.Model):

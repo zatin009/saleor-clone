@@ -73,11 +73,17 @@ def shipping_zone_details(request, pk):
     zone = get_object_or_404(ShippingZone, pk=pk)
     price_based = zone.shipping_methods.price_based()
     weight_based = zone.shipping_methods.weight_based()
+    # <ADD
+    percentage_based = zone.shipping_methods.percentage_based()
+    # ADD>
+    # <ADD 'percentage_based':percentage_based
     ctx = {
         "shipping_zone": zone,
         "price_based": price_based,
         "weight_based": weight_based,
+        'percentage_based': percentage_based
     }
+    # ADD 'percentage_based':percentage_based >
     return TemplateResponse(request, "dashboard/shipping/detail.html", ctx)
 
 

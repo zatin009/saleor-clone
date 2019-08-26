@@ -6,7 +6,7 @@ from ..utils import (
     update_shipping_address_in_anonymous_checkout,
     update_shipping_address_in_checkout,
 )
-
+from django.utils.timezone import now
 
 def anonymous_user_shipping_address_view(request, checkout):
     """Display the shipping step for a user who is not logged in."""
@@ -30,11 +30,15 @@ def user_shipping_address_view(request, checkout):
     """
     checkout.email = request.user.email
     checkout.save(update_fields=["email"])
+    # <ADD
+    checkout.last_change = now()
     user_addresses = checkout.user.addresses.all()
-
+    # < Working Func
     addresses_form, address_form, updated = update_shipping_address_in_checkout(
         checkout, user_addresses, request.POST or None, request.country
     )
+    # Working Func >
+    # ADD>
     if updated:
         return redirect("checkout:shipping-method")
 

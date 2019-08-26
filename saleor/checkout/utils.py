@@ -52,6 +52,7 @@ from .forms import (
 )
 from .models import Checkout, CheckoutLine
 
+
 COOKIE_NAME = "checkout"
 
 
@@ -730,21 +731,30 @@ def change_shipping_address_in_checkout(checkout, address):
 def get_checkout_context(checkout, discounts, currency=None, shipping_range=None):
     """Retrieve the data shared between views in checkout process."""
     manager = get_extensions_manager()
-    checkout_total = (
-        manager.calculate_checkout_total(checkout=checkout, discounts=discounts)
-        - checkout.get_total_gift_cards_balance()
-    )
-    checkout_total = max(checkout_total, zero_taxed_money(checkout_total.currency))
     checkout_subtotal = manager.calculate_checkout_subtotal(checkout, discounts)
-    shipping_price = manager.calculate_checkout_shipping(checkout, discounts)
-
     shipping_required = checkout.is_shipping_required()
     total_with_shipping = TaxedMoneyRange(
         start=checkout_subtotal, stop=checkout_subtotal
     )
     if shipping_required and shipping_range:
         total_with_shipping = shipping_range + checkout_subtotal.net
-
+    # <ADD
+    if checkout.shipping_method != None and checkout.shipping_method.type == 'percentage':
+        checkout_total = (
+                manager.calculate_checkout_total_with_type_percentage(checkout=checkout, discounts=discounts)
+                - checkout.get_total_gift_cards_balance()
+        )
+        checkout_total = max(checkout_total, zero_taxed_money(checkout_total.currency))
+        shipping_price = manager.calculate_checkout_shipping_with_type_percentage(checkout, discounts)
+        checkout.save()
+    else:
+        checkout_total = (
+                manager.calculate_checkout_total(checkout=checkout, discounts=discounts)
+                - checkout.get_total_gift_cards_balance()
+        )
+        checkout_total = max(checkout_total, zero_taxed_money(checkout_total.currency))
+        shipping_price = manager.calculate_checkout_shipping(checkout, discounts)
+    # ADD>
     context = {
         "checkout": checkout,
         "checkout_are_taxes_handled": manager.taxes_are_enabled(),
@@ -1003,17 +1013,16 @@ def get_shipping_price_estimate(checkout: Checkout, discounts, country_code):
     shipping_methods = get_valid_shipping_methods_for_checkout(
         checkout, discounts, country_code=country_code
     )
-
     if shipping_methods is None:
         return None
 
     shipping_methods = shipping_methods.values_list("price", flat=True)
-
     if not shipping_methods:
         return None
 
     manager = get_extensions_manager()
     prices = MoneyRange(start=min(shipping_methods), stop=max(shipping_methods))
+
     return manager.apply_taxes_to_shipping_price_range(prices, country_code)
 
 
@@ -1058,6 +1067,20 @@ def _process_shipping_data_for_order(checkout, shipping_price):
         return {}
 
     shipping_address = checkout.shipping_address
+    # <ADD
+    # if checkout.shipping_method.type == "percentage":
+    #     # shipping_price_net = checkout.get_shipping_price_with_type_percentage(discounts)
+    #     total = checkout.get_total_with_type_percentage(discounts)
+    # else:
+    #     total = checkout.get_total(discounts)
+    #     shipping_price_net = checkout.get_shipping_price()
+    # ADD>
+
+    if checkout.user:
+        store_user_address(checkout.user, shipping_address, AddressType.SHIPPING)
+        if checkout.user.addresses.filter(pk=shipping_address.pk).exists():
+            shipping_address = shipping_address.get_copy()
+    # ADD>
 
     if checkout.user:
         store_user_address(checkout.user, shipping_address, AddressType.SHIPPING)
@@ -1146,13 +1169,24 @@ def prepare_order_data(*, checkout: Checkout, tracking_code: str, discounts) -> 
     order_data = {}
 
     manager = get_extensions_manager()
-    total = (
-        manager.calculate_checkout_total(checkout=checkout, discounts=discounts)
-        - checkout.get_total_gift_cards_balance()
-    )
-    total = max(total, zero_taxed_money(total.currency))
+    # <ADD
+    if checkout.shipping_method != None and checkout.shipping_method.type == 'percentage':
+        total = (
+                manager.calculate_checkout_total_with_type_percentage(checkout=checkout, discounts=discounts)
+                - checkout.get_total_gift_cards_balance()
+        )
+        total = max(total, zero_taxed_money(total.currency))
+        shipping_total = manager.calculate_checkout_shipping_with_type_percentage(checkout, discounts)
+        checkout.save()
+    else:
+        total = (
+                manager.calculate_checkout_total(checkout=checkout, discounts=discounts)
+                - checkout.get_total_gift_cards_balance()
+        )
+        total = max(total, zero_taxed_money(total.currency))
+        shipping_total = manager.calculate_checkout_shipping(checkout, discounts)
+    # ADD>
 
-    shipping_total = manager.calculate_checkout_shipping(checkout, discounts)
     order_data.update(_process_shipping_data_for_order(checkout, shipping_total))
     order_data.update(_process_user_data_for_order(checkout))
     order_data.update(

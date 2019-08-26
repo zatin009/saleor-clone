@@ -16,7 +16,7 @@
   <ul class="breadcrumbs breadcrumbs--history">
     <li>
       <a href="{% url 'dashboard:shipping-zone-list' %}">
-        {% trans "Shipping zones" context "Shipping zone form breadcrumbs" %}
+        {% trans "A2A Logistics" context "Shipping zone form breadcrumbs" %}
       </a>
     </li>
     <li class="back-mobile">
@@ -51,8 +51,10 @@
         </div>
       </div>
     </div>
-    {% trans "Price based shipping" context "Title of the shipping methods list" as price_based_header %}
-    {% trans "Weight based shipping" context "Title of the shipping methods list" as weight_based_header %}
+    {% trans "Percentage Based Rate" context "Title of the shipping methods list" as percentage_based_header %}
+    {% trans "Price Based Rate" context "Title of the shipping methods list" as price_based_header %}
+    {% trans "Weight Based Rate" context "Title of the shipping methods list" as weight_based_header %}
+    {% include "dashboard/shipping/methods/_A2A_service_charge_dashboard.html" with type='percentage' header=percentage_based_header shipping_methods=percentage_based %}
     {% include "dashboard/shipping/methods/_shipping_methods_table.html" with type='price' header=price_based_header shipping_methods=price_based %}
     {% include "dashboard/shipping/methods/_shipping_methods_table.html" with type='weight' header=weight_based_header shipping_methods=weight_based %}
   </div>

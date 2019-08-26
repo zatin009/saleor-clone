@@ -226,10 +226,50 @@ class WeightShippingMethodForm(forms.ModelForm):
             )
         return data
 
+# <ADD
+class PercentageShippingMethodForm(forms.ModelForm):
+    class Meta(ShippingMethodForm.Meta):
+        labels = {
+            'minimum_order_price': pgettext_lazy(
+                'Minimum order price to use this shipping method',
+                'Minimum order price'),
+            'maximum_order_price': pgettext_lazy(
+                'Maximum order price to use this order',
+                'Maximum order price')}
+        labels.update(ShippingMethodForm.Meta.labels)
+        fields = [
+            'name','percentage','minimum_order_price','maximum_order_price']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['maximum_order_price'].widget.attrs['placeholder'] = (
+            pgettext_lazy(
+                'Placeholder for maximum order price set to unlimited',
+                'No limit'))
+        self.fields['minimum_order_price'].widget.attrs['placeholder'] = '0'
+
+    def clean_minimum_order_price(self):
+        return self.cleaned_data['minimum_order_price'] or 0
+
+    def clean(self):
+        data = super().clean()
+        min_price = data.get('minimum_order_price')
+        max_price = data.get('maximum_order_price')
+        if min_price and max_price is not None and max_price <= min_price:
+            self.add_error('maximum_order_price', pgettext_lazy(
+                'Price shipping method form error',
+                'Maximum order price should be larger'
+                ' than the minimum order price.'))
+        return data
+# ADD>
 
 def get_shipping_form(type):
     if type == ShippingMethodType.WEIGHT_BASED:
         return WeightShippingMethodForm
     elif type == ShippingMethodType.PRICE_BASED:
         return PriceShippingMethodForm
+    # <ADD
+    elif type == ShippingMethodType.PERCENTAGE_BASED:
+        return PercentageShippingMethodForm
+    # ADD>
     raise TypeError("Unknown form type: %s" % type)

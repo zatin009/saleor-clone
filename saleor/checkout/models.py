@@ -105,6 +105,17 @@ class Checkout(ModelWithMetadata):
             else zero_money()
         )
 
+    # <ADD
+    def get_shipping_price_with_type_percentage(self, discounts=None):
+        shipping_price = (self.get_subtotal(discounts) * self.shipping_method.percentage / 100)
+        return max(shipping_price, zero_money(shipping_price.currency))
+
+    def get_total_with_type_percentage(self, discounts=None):
+        total_type_percentage = self.get_subtotal(discounts) + self.get_shipping_price_with_type_percentage(
+            discounts) - self.discount_amount
+        return max(total_type_percentage, zero_money(total_type_percentage.currency))
+
+    # ADD>
     def get_subtotal(self, discounts=None):
         """Return the total cost of the checkout prior to shipping."""
         subtotals = (line.get_total(discounts) for line in self)
@@ -113,9 +124,9 @@ class Checkout(ModelWithMetadata):
     def get_total(self, discounts=None):
         """Return the total cost of the checkout."""
         total = (
-            self.get_subtotal(discounts)
-            + self.get_shipping_price()
-            - self.discount_amount
+                self.get_subtotal(discounts)
+                + self.get_shipping_price()
+                - self.discount_amount
         )
         return max(total, zero_money(total.currency))
 

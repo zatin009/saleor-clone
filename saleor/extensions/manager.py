@@ -73,9 +73,22 @@ class ExtensionsManager:
             "calculate_checkout_total", default_value, checkout, discounts
         )
 
-    def calculate_checkout_subtotal(
+    # <ADD
+    def calculate_checkout_total_with_type_percentage(
         self, checkout: "Checkout", discounts: List["DiscountInfo"]
     ) -> TaxedMoney:
+        total = checkout.get_total_with_type_percentage(discounts)
+        default_value = quantize_price(
+            TaxedMoney(net=total, gross=total), total.currency
+        )
+        return self.__run_method_on_plugins(
+            "calculate_checkout_total_with_type_percentage", default_value, checkout, discounts
+        )
+    # ADD>
+
+    def calculate_checkout_subtotal(
+        self, checkout: "Checkout", discounts: List["DiscountInfo"]
+        ) -> TaxedMoney:
         subtotal = checkout.get_subtotal(discounts)
         default_value = quantize_price(
             TaxedMoney(net=subtotal, gross=subtotal), subtotal.currency
@@ -93,6 +106,18 @@ class ExtensionsManager:
         return self.__run_method_on_plugins(
             "calculate_checkout_shipping", default_value, checkout, discounts
         )
+
+    # < ADD
+    def calculate_checkout_shipping_with_type_percentage(
+        self, checkout: "Checkout", discounts: List["DiscountInfo"]
+    ) -> TaxedMoney:
+        total = checkout.get_shipping_price_with_type_percentage(discounts)
+        total = TaxedMoney(net=total, gross=total)
+        default_value = quantize_price(total, total.currency)
+        return self.__run_method_on_plugins(
+            "calculate_checkout_shipping_with_type_percentage", default_value, checkout, discounts
+        )
+    # ADD>
 
     def calculate_order_shipping(self, order: "Order") -> TaxedMoney:
         shipping_price = order.shipping_method.price
