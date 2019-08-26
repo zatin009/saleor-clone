@@ -243,7 +243,6 @@ const ShippingZoneRateDialog = withStyles(styles, {
                   )}
                 </DialogContent>
                 <Hr/>
-                {/*Working Func*/}
                 <DialogContent>
                   <Typography
                     className={classes.subheading}
@@ -295,7 +294,6 @@ const ShippingZoneRateDialog = withStyles(styles, {
                     </>
                   )}
                 </DialogContent>
-                {/*Working Func*/}
                 <DialogActions>
                   <Button onClick={onClose}>
                     {i18n.t("Cancel", {context: "button"})}
