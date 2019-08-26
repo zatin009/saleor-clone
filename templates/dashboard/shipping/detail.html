@@ -54,8 +54,8 @@
     {% trans "Percentage Based Rate" context "Title of the shipping methods list" as percentage_based_header %}
     {% trans "Price Based Rate" context "Title of the shipping methods list" as price_based_header %}
     {% trans "Weight Based Rate" context "Title of the shipping methods list" as weight_based_header %}
-    {% include "dashboard/shipping/methods/_A2A_service_charge_dashboard.html" with type='percentage' header=percentage_based_header shipping_methods=percentage_based %}
-    {% include "dashboard/shipping/methods/_shipping_methods_table.html" with type='price' header=price_based_header shipping_methods=price_based %}
-    {% include "dashboard/shipping/methods/_shipping_methods_table.html" with type='weight' header=weight_based_header shipping_methods=weight_based %}
+    {% include "dashboard/shipping/methods/_shipping_methods_table_type_percentage.html" with type='percentage' header=percentage_based_header shipping_methods=percentage_based %}
+    {% include "dashboard/shipping/methods/_shipping_methods_table_type_price.html" with type='price' header=price_based_header shipping_methods=price_based %}
+    {% include "dashboard/shipping/methods/_shipping_methods_table_type_weight.html" with type='weight' header=weight_based_header shipping_methods=weight_based %}
   </div>
 {% endblock %}

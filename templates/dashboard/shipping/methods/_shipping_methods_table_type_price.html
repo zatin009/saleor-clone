@@ -32,7 +32,7 @@
           {% for shipping in shipping_methods %}
             <tr>
               <td>{{ shipping.name }}</td>
-              <td>{{ shipping.get_type_display }}</td>
+              <td>{% price shipping.minimum_order_price%} - {% price shipping.maximum_order_price %}</td>
               <td>{% price shipping.price %}</td>
               <td class="right-align">
                 <a href="{% url 'dashboard:shipping-method-edit' shipping_zone_pk=shipping_zone.pk shipping_method_pk=shipping.pk %}" class="btn-flat waves-effect">

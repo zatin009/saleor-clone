@@ -13,7 +13,6 @@
           {% trans "Add" %}
         </a>
     </div>
-
     <div class="data-table-container">
       <table class="bordered highlight responsive data-table">
         <thead>
@@ -22,20 +21,19 @@
               {% trans "Name" context "Header of the shipping methods list" %}
             </th>
             <th>
-                {% trans "Range" context "Header of the shipping methods list" %}
+              {% trans "Range" context "Header of the shipping methods list" %}
             </th>
             <th>
-                {% trans "Percentage" context "Header of the shipping methods list" %}
+              {% trans "Price" context "Header of the shipping methods list" %}
             </th>
           </tr>
         </thead>
-
         <tbody>
           {% for shipping in shipping_methods %}
             <tr>
               <td>{{ shipping.name }}</td>
-              <td>{{ shipping.get_type_display }}</td>
-              <td>{{ shipping.percentage }} %</td>
+              <td>{{ shipping.minimum_order_weight}} - {{ shipping.maximum_order_weight}}</td>
+              <td>{% price shipping.price %}</td>
               <td class="right-align">
                 <a href="{% url 'dashboard:shipping-method-edit' shipping_zone_pk=shipping_zone.pk shipping_method_pk=shipping.pk %}" class="btn-flat waves-effect">
                   {% trans 'Edit' context 'Attribute value edit action' %}
