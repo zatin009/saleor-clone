@@ -34,7 +34,6 @@ class Query(
 ):
     node = graphene.Node.Field()
 
-
 class Mutations(
     AccountMutations,
     CheckoutMutations,

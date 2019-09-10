@@ -983,17 +983,15 @@ def remove_voucher_from_checkout(checkout: Checkout):
         ]
     )
 
-
 def get_valid_shipping_methods_for_checkout(
     checkout: Checkout, discounts, country_code=None
 ):
     manager = get_extensions_manager()
     return ShippingMethod.objects.applicable_shipping_methods_for_instance(
         checkout,
-        price=manager.calculate_checkout_subtotal(checkout, discounts).gross,
+        price= manager.calculate_checkout_subtotal(checkout, discounts).gross,
         country_code=country_code,
     )
-
 
 def is_valid_shipping_method(checkout, discounts):
     """Check if shipping method is valid and remove (if not)."""

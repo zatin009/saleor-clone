@@ -1,3 +1,4 @@
+// import {type} from "os";
 import { parse as parseQs } from "qs";
 import React from "react";
 import { Route, RouteComponentProps, Switch } from "react-router-dom";
@@ -23,6 +24,7 @@ const OrderList: React.StatelessComponent<RouteComponentProps<any>> = ({
   const params: OrderListUrlQueryParams = qs;
   return <OrderListComponent params={params} />;
 };
+
 const OrderDraftList: React.StatelessComponent<RouteComponentProps<any>> = ({
   location
 }) => {

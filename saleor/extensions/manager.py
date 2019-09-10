@@ -85,7 +85,6 @@ class ExtensionsManager:
             "calculate_checkout_total_with_type_percentage", default_value, checkout, discounts
         )
     # ADD>
-
     def calculate_checkout_subtotal(
         self, checkout: "Checkout", discounts: List["DiscountInfo"]
         ) -> TaxedMoney:

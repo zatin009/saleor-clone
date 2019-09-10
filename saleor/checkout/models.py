@@ -115,6 +115,10 @@ class Checkout(ModelWithMetadata):
             discounts) - self.discount_amount
         return max(total_type_percentage, zero_money(total_type_percentage.currency))
 
+    def get_subtotal_with_type_percentage(self, discounts=None):
+        """Return the total cost of the checkout prior to shipping."""
+        subtotals = (line.get_total_with_type_percentage(discounts) for line in self)
+        return sum(subtotals, zero_money(currency=settings.DEFAULT_CURRENCY))
     # ADD>
     def get_subtotal(self, discounts=None):
         """Return the total cost of the checkout prior to shipping."""

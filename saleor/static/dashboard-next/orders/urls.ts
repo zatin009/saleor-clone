@@ -41,6 +41,7 @@ export type OrderDraftListUrlDialog = "remove";
 export type OrderDraftListUrlQueryParams = BulkAction &
   Dialog<OrderDraftListUrlDialog> &
   Pagination;
+
 export const orderDraftListUrl = (
   params?: OrderDraftListUrlQueryParams
 ): string => {
